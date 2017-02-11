@@ -44,13 +44,13 @@ DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Default Programs
-export LANG=en_US.UTF-8
+export LANG="en_US.UTF-8"
 export EDITOR="vim"
 export PAGER="less"
-export BROWSER="opera"
+export BROWSER="chromium"
 export BROWSERCLI="w3m"
 export MOVPLAY="mpv"
-export PICVIEW="feh"
+export PICVIEW="ristretto"
 export SNDPLAY="mpv"
 export TERMINAL="uxterm"
 export PULSE_LATENCY_MSEC=60
@@ -81,7 +81,7 @@ alias Config='cd ~/.config'
 
 
 # Fonts
-alias Fonts='fc-cache -vf ~/.fonts'
+alias Fonts='fc-cache -vf ~/fonts'
 alias font-check='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
 
 ## Conky
@@ -110,6 +110,7 @@ alias cdB='cd /etc/portage/package.mask && sudo su'
 alias cdK='cd /etc/portage/package.accept_keywords && sudo su'
 alias eM='sudo vim /etc/portage/make.conf'
 ## Portage
+
 alias F='sudo tail -f /var/log/emerge-fetch.log'
 alias E='sudo tail -f /var/log/emerge.log'
 
@@ -117,6 +118,10 @@ alias E='sudo tail -f /var/log/emerge.log'
 alias PS='sudo pacman -S'
 alias PR='sudo pacman -R'
 alias PL='tail -f /var/log/pacman.log'
+
+## Debian based
+alias SI='sudo apt-get install'
+alias DP='tail -f /var/log/dpkg.log'
 
 ## Directories
 alias ll='ls -l'
