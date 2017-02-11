@@ -1,4 +1,4 @@
-# desktop_setup
+# rulebend3r_setup
 
 first, major thanks to @msjche and @DasGregor for inspiration and knowledge
 
