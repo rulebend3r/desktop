@@ -9,3 +9,5 @@ in the coming weeks, Ill upload some goodies Ive been working on including a twi
 twitter handle = @rulebend3r
 
 4070 for life!
+
+also thanks to my wife for putting up with my tech shenanigans!
