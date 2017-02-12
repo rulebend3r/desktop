@@ -72,7 +72,7 @@ alias Shutdown='sudo shutdown -P now'
 alias Suspend='sudo pm-suspend'
 
 # Git
-alias cdG='cd ~/desktop_desktop'
+alias cdG='cd ~/Git/rulebend3r_desktop'
 alias GitStatus='git status -u no'
 alias GitCommit='git commit -m'
 
