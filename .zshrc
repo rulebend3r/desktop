@@ -115,6 +115,7 @@ alias F='sudo tail -f /var/log/emerge-fetch.log'
 alias E='sudo tail -f /var/log/emerge.log'
 
 ## Pacman
+alias PU='sudo pacman -Syyu'
 alias PS='sudo pacman -S'
 alias PR='sudo pacman -R'
 alias PL='tail -f /var/log/pacman.log'
