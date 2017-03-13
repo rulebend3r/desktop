@@ -198,6 +198,12 @@ alias PL='tail -f /var/log/pacman.log'
 alias Unlock='sudo rm /var/lib/pacman/db.lck'
 alias PU='sudo pacman -Syyu'
 
+## Debian/Debian-Based
+alias Update='sudo apt-get update'
+alias Upgrade='sudo apt-get dist-upgrade'
+alias DL='tail -f /var/log/dpkg.log'
+alias SAS='sudo apt-cache search'
+
 ## Awesome 
 alias eA='cd ~/.config/awesome && vim rc.lua'
 alias eW='cd ~/.config/awesome && vim wi.lua'
@@ -250,7 +256,7 @@ alias cdYT='cd ~/Downloads/YouTube'
 alias yt='mpsyt'
 alias cleanYT='rm ~/Downloads/YouTube/*.*'
 #alias DL='~/Scripts/ytdl-helper.sh'
-alias DL='cd ~/Downloads/YouTube && youtube-dl'
+#alias DL='cd ~/Downloads/YouTube && youtube-dl'
 
 ## X Resources Stuff
 alias eX='vim ~/.Xresources'
@@ -761,10 +767,10 @@ plugins=(git archlinux vi-mode themes zsh-completions color-command)
 source /home/rulebend3r/.oh-my-zsh/oh-my-zsh.sh
 
 clear
-archey3
+#archey3
 #neofetch
 #/home/rulebend3r/Scripts/pacolor.sh
 #/home/rulebend3r/Scripts/starwars.sh
 #/home/rulebend3r/Scripts/batman.sh
 #/home/rulebend3r/Scripts/invaders1.sh
-#screenfetch
+screenfetch
