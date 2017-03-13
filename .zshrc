@@ -1,6 +1,6 @@
 #rulebend3r# Oh-My-Zsh
 ZSH=/home/rulebend3r/.oh-my-zsh
-ZSH_THEME="newpowerline"    #kardan agnoster af-magic bira clean candy gentoo terminalparty
+ZSH_THEME="newpowerline"    #kardan agnoster af-magic bira clean gentoo terminalparty
 
 #POWERLINE_RIGHT_A="date"
 #POWERLINE_RIGHT_A="exit-status"
