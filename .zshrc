@@ -2,6 +2,14 @@
 ZSH=/home/rulebend3r/.oh-my-zsh
 ZSH_THEME="newpowerline"    #kardan agnoster af-magic bira clean gentoo terminalparty
 
+#####################
+###set consolefont###
+#####################
+if [ $TERM = "linux" ]; then
+    setfont ter-powerline-v16n
+fi
+#####################
+
 #POWERLINE_RIGHT_A="date"
 #POWERLINE_RIGHT_A="exit-status"
 #POWERLINE_FULL_CURRENT_PATH="true"
