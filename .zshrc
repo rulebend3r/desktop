@@ -203,6 +203,7 @@ alias Update='sudo apt-get update'
 alias Upgrade='sudo apt-get dist-upgrade'
 alias DL='tail -f /var/log/dpkg.log'
 alias SAS='sudo apt-cache search'
+alias SI='sudo apt-get install'
 
 ## Awesome 
 alias eA='cd ~/.config/awesome && vim rc.lua'
