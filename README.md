@@ -1,7 +1,5 @@
 # rulebend3r_desktop
 
-first, major thanks to @msjche and @DasGregor for inspiration and knowledge.
-
 mostly for my personal use, this repo contains just my basic desktop/zsh/vim setup for Gentoo/Arch/Debian.
 
 ftr, this setup is used primarily for Gentoo with XFCE4 on a 1920x1080 display.
