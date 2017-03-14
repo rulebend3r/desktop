@@ -100,7 +100,7 @@ alias Weather='wego'
 alias Redding='wego 4 redding'
 
 # Git
-alias cdG='cd ~/Git'
+alias cdG='cd ~/Git/rulebend3r_desktop'
 alias GitStatus='git status -u no'
 alias GitCommit='git commit -m'
 
