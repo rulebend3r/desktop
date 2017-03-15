@@ -88,6 +88,7 @@ alias unblock-wireless='rfkill unblock all && ifconfig set wlan0 up'
 alias toggle-wifi='sudo ifconfig wlan0 down && sudo ifconfig wlan0 up'
 alias audit='lynis --auditor rulebend3r'
 alias Minimal='~/Scripts/minimal.sh'
+alias SR='sudo reboot'
 
 # Programming
 alias cdProg='cd ~/Dropbox/Programming'
