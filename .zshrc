@@ -193,13 +193,13 @@ alias E='sudo tail -f /var/log/emerge.log'
 alias Man-mirrors='sudo pacman-mirrors -g && sudo pacman -Syy'
 
 
-## Pacman
+## Arch
 #alias UU='packer-color -Syyu && rm /tmp/off.updates && rm /tmp/aur.updates'
 alias UU='packer-color -Syyu'
 alias UUA='yaourt -Syyua --devel'
 alias P='packer-color --noconfirm'
 alias PI='packer-color -S --noconfirm'
-alias Y='yaourt --noconfirm'
+alias YT='yaourt'
 alias YY='yaourt-gui'
 alias PS='sudo pacman -S'
 alias PR='sudo pacman -R'
