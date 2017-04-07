@@ -231,8 +231,9 @@ alias 1080='/home/rulebend3r/Scripts/Theming/1080.sh'
 alias 1440='/home/rulebend3r/Scripts/Theming/1440.sh'
 
 ## Tmux
-alias TM='~/.tmuxgo'
+alias TM='tmux'
 alias eTM='vim ~/.tmux.conf'
+alias tkill='tmux kill-session'
 
 ## Geeknote
 alias geek-new='~/Scripts/geeknote/geeknote-new-note.sh'
@@ -773,7 +774,6 @@ iptv-Rueters() {  rtmpdump \
 
 plugins=(git archlinux vi-mode themes zsh-completions color-command)
 #source /home/rulebend3r/Git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/rulebend3r/.oh-my-zsh/oh-my-zsh.sh
 
 clear
@@ -784,3 +784,6 @@ clear
 #/home/rulebend3r/Scripts/batman.sh
 #/home/rulebend3r/Scripts/invaders1.sh
 screenfetch
+
+#source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
