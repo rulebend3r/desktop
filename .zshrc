@@ -102,7 +102,9 @@ alias Redding='wego 4 redding'
 # Git
 alias cdG='cd ~/Git/rulebend3r_desktop'
 alias GitStatus='git status -u no'
-alias GitCommit='git commit -m'
+alias GA='git add'
+alias GC='git commit -m'
+alias GP='git push'
 
 # Configs
 alias Config='cd ~/.config'
@@ -194,15 +196,11 @@ alias Man-mirrors='sudo pacman-mirrors -g && sudo pacman -Syy'
 
 
 ## Arch
-#alias UU='packer-color -Syyu && rm /tmp/off.updates && rm /tmp/aur.updates'
-alias UU='packer-color -Syyu'
-alias UUA='yaourt -Syyua --devel'
-alias P='packer-color --noconfirm'
-alias PI='packer-color -S --noconfirm'
 alias YT='yaourt'
 alias YY='yaourt-gui'
 alias PS='sudo pacman -S'
 alias PR='sudo pacman -R'
+alias PSS='pacman -Ss'
 alias PL='tail -f /var/log/pacman.log'
 alias Unlock='sudo rm /var/lib/pacman/db.lck'
 alias PU='sudo pacman -Syyu'
