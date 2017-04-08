@@ -104,7 +104,7 @@ alias cdG='cd ~/Git/rulebend3r_desktop'
 alias GitStatus='git status -u no'
 alias GA='git add'
 alias GC='git commit -m'
-alias Push='git push'
+alias Push='git push origin master'
 alias Pull='git pull'
 
 # Configs
