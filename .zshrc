@@ -104,7 +104,8 @@ alias cdG='cd ~/Git/rulebend3r_desktop'
 alias GitStatus='git status -u no'
 alias GA='git add'
 alias GC='git commit -m'
-alias GP='git push'
+alias Push='git push'
+alias Pull='git pull'
 
 # Configs
 alias Config='cd ~/.config'
@@ -136,7 +137,7 @@ alias Awesome='sudo /home/rulebend3r/Scripts/awesome.sh'
 #dd bs=4M if=/path/to/archlinux.iso of=/dev/sdb && sync
 
 ## Fun
-alias aquarium='asciiquarium'
+alias aq='asciiquarium'
 
 ## Conky
 alias eC='vim ~/.conkyrc'
@@ -186,6 +187,7 @@ alias cdB='cd /etc/portage/package.mask && sudo su'
 alias cdK='cd /etc/portage/package.accept_keywords && sudo su'
 alias eM='sudo vim /etc/portage/make.conf'
 alias EW='emerge-webrsync'
+alias eup='etc-update'
 
 ## Portage
 alias F='sudo tail -f /var/log/emerge-fetch.log'
@@ -783,5 +785,5 @@ clear
 #/home/rulebend3r/Scripts/invaders1.sh
 screenfetch
 
-#source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
