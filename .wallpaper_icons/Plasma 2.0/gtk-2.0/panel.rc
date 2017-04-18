@@ -1,0 +1,68 @@
+style "panel"
+{
+engine "pixmap"
+  {
+
+  }
+xthickness = 2
+ythickness = 2
+
+	bg_pixmap[NORMAL] 		= "Panel/dark-bottom.png"
+
+ }
+
+widget "*Xfce*Panel*" 			style "panel"
+
+style "panelbuttons"
+{
+ xthickness            		= 2
+ ythickness            		= 2
+
+
+	engine "pixmap" {
+      
+	image
+	{
+		function   	= BOX
+		state		= NORMAL
+		file            = "Panel/null-panel.png"
+		border         	= { 0, 0, 0, 0 }
+		stretch         = TRUE
+	}
+		
+	image
+	{
+		function	= BOX
+		state		= PRELIGHT
+		recolorable	= TRUE
+		file		= "Panel/panel-button-hover.png"
+		border		= { 0 , 0 , 0 , 0}
+		stretch		= TRUE
+	}		
+
+	image
+	{
+		function	= BOX
+		state		= ACTIVE
+		file		= "Panel/panel-button-hover.png"
+		border		= { 0 , 0 , 0 , 0}
+		stretch		=TRUE
+	}
+
+	image
+	{
+		function       	= BOX
+		state		= INSENSITIVE
+		file            = "Panel/null-panel.png"
+		stretch         = TRUE
+		
+	} 
+   }
+
+}
+
+class	"*Menu*"				    style "panelbuttons"
+widget_class "*Xfce*Panel*" 			    style "panelbuttons"
+widget_class "*tasklist*" 			    style "panelbuttons"
+widget_class "*Xfce*Panel*.GtkToggleButton" 	    style "panelbuttons"
+widget_class "*Xfce*NetkTasklist*GtkToggleButton"   style "panelbuttons"

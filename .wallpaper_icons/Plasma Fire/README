@@ -1,0 +1,9 @@
+Quick hack of Adwaita from current git & slightly modified version of my Adwaita Dark gtk-2.0 & shell theme.
+
+#### May 2016 #####
+A hack of the hack above from here:
+http://gnome-look.org/content/show.php/KISS-3.19.2?content=174560
+Notable changes are removal of transition effects, various shadow entries and 
+use of colour definitions through-out (not entirely consistant or correct).
+Not all features of theme capability ascertained, in particular OSD presentations.
+Further changes are certain to happen! :)

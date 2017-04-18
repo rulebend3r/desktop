@@ -1,0 +1,15 @@
+
+# ==============================================================================
+# CHROMIUM SPECIFIC SETTINGS
+# ==============================================================================
+
+
+style "chrome-gtk-frame"
+{
+  ChromeGtkFrame::frame-color = "#000000"
+  ChromeGtkFrame::inactive-frame-color = "#000000"
+  ChromeGtkFrame::incognito-frame-color = "#000000"
+  ChromeGtkFrame::incognito-inactive-frame-color = "#000000"
+}
+
+class "ChromeGtkFrame" style "chrome-gtk-frame"
