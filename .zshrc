@@ -385,7 +385,7 @@ alias Power='sudo powertop'
 ## Misc
 alias SX='startx'
 alias H='htop'
-alias G='glances'
+alias G='glances -t 1'
 alias SS='sudo su'
 alias CM='cmatrix'
 alias biguns='~/Scripts/biguns.sh'
