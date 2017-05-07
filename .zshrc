@@ -79,7 +79,7 @@ for ext in wav mp3 ogg;            do alias -s $ext=$SNDPLAY; done
 alias Nvidia-Settings='optirun -b none nvidia-settings -c :8'
 
 ## System
-alias Shutdown='sudo shutdown -P now'
+alias SSD='sudo shutdown -P now'
 alias Suspend='sudo pm-suspend'
 alias Stat='uname -a;systemd-analyze time;wc -l /lib/modules/$(uname -r)/modules.order;lsinitcpio -a /boot/initramfs-linux.img'
 #alias laptop-mode='grep -r '^\(CONTROL\|ENABLE\)_' /etc/laptop-mode/conf.d'
