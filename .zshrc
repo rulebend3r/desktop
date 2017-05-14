@@ -383,6 +383,7 @@ alias bat-all='acpi -V'
 alias Power='sudo powertop'
 
 ## Misc
+alias x='exit'
 alias SX='startx'
 alias H='htop'
 alias G='glances -t 0.1'
