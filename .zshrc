@@ -787,5 +787,12 @@ clear
 #/home/rulebend3r/Scripts/invaders1.sh
 screenfetch
 
+#Gentoo#
 source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#Arch#
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#Kali#
+#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
