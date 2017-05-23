@@ -277,7 +277,7 @@ alias XTR='xrdb -merge ~/.Xresources'
 ## Zsh Stuff
 alias eZ='vim ~/.zshrc'
 alias eOMZ='vim ~/.oh-my-zsh/themes/rulebend3r.zsh-theme'
-alias Z='source ~/.zshrc'
+alias z='source ~/.zshrc'
 
 ## Vim Stuff
 alias eV='vim ~/.vimrc'
