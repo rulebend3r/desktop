@@ -1,0 +1,332 @@
+use gparted live usb and wipe drive(s)
+create gpt partition scheme on drive(s)
+boot gentoo live install usb
+parted -a optimal /dev/sda
+mklabel gpt
+unit mib
+mkpart primary 1 3
+name 1 grub
+set 1 bios_grub on
+mkpart primary 3 515
+name 2 boot
+mkpart primary 515 16900
+name 3 swap
+mkpart primary 16900 -1
+name 4 root
+set 2 boot on
+print
+quit
+parted -a optimal /dev/sdb
+mklabel gpt
+unit mib
+mkpart primary 1 -1
+name 1 home
+print
+quit
+mkfs.vfat -L "grub" /dev/sda1 (may give error. if so dont bother naming it)
+mkfs.ext2 -L "boot" /dev/sda2
+mkswap -L "swap" /dev/sda3
+swapon /dev/sda3
+mkfs.ext4 -L "root" /dev/sda4
+mkfs.ext4 -L "home" /dev/sdb1
+mkdir /mnt/gentoo
+mount /dev/sda4 /mnt/gentoo
+mkdir /mnt/gentoo/boot
+mount /dev/sda2 /mnt/gentoo/boot
+mkdir /mnt/gentoo/home
+mount /dev/sdb1 /mnt/gentoo/home
+date MMDDhhmmYYYY
+cd /mnt/gentoo
+links https://www.gentoo.org/downloads/mirrors/
+navigate to and download stage3
+exit links
+tar xvjpf stage3-*.tar.bz2 --xattrs --numeric-owner
+nano -w /mnt/gentoo/etc/portage/make.conf
+add the following:
+# These settings were set by the catalyst build script that automatically
+# built this stage.
+# Please consult /usr/share/portage/config/make.conf.example for a more
+# detailed example.
+
+CFLAGS="-march=native -O2 -pipe"
+CXXFLAGS="${CFLAGS}"
+
+# WARNING: Changing your CHOST is not something that should be done lightly.
+# Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.
+
+CHOST="x86_64-pc-linux-gnu"
+
+# These are the USE and USE_EXPAND flags that were used for
+# buidling in addition to what is provided by the profile.
+
+USE="X threads gstreamer upower dbus jpeg png svg lock session startup-notification thunar udev dvd cdr usb pulseaudio alsa python gtk gtk2 gtk3 icu networkmanager lm_sensors mmx sse sse2 -qt4 -qt5 -kde -gnome"
+
+#source /var/lib/layman/make.conf
+
+MAKE_OPTS="-j9"
+
+VIDEO_CARDS="intel i915 i965 fbdev"
+ALSA_CARDS="snd_hda_intel"
+INPUT_DEVICES="evdev keyboard mouse synaptics"
+
+#XFCE_PLUGINS="power brightness clock trash"
+
+#CPU_FLAGS_X86="mmx sse sse2"
+
+ACCEPT_LICENSE="* @EULA"
+LINGUAS="en"
+L10N="en_US"
+
+PORTDIR="/usr/portage"
+DISTDIR="${PORTDIR}/distfiles"
+PKGDIR="${PORTDIR}/packages"
+save
+mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
+mkdir /mnt/gentoo/etc/portage/repos.conf
+cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
+cp -L /etc/resolv.conf /mnt/gentoo/etc/
+mount -t proc /proc /mnt/gentoo/proc
+mount --rbind /sys /mnt/gentoo/sys
+mount --make-rslave /mnt/gentoo/sys
+mount --rbind /dev /mnt/gentoo/dev
+mount --make-rslave /mnt/gentoo/dev
+chroot /mnt/gentoo /bin/bash
+source /etc/profile
+export PS1="(chroot) $PS1"
+emerge-webrsync
+emerge --sync
+eselect news list
+eselect news read
+eselect profile set 3
+echo "US/Eastern" > /etc/timezone
+emerge --config sys-libs/timezone-data
+nano -w /etc/locale.gen (uncomment en_US.UTF-8 UTF-8)
+locale-gen
+eselect locale list
+eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
+env-update && source /etc/profile && export PS1="(chroot) $PS1"
+cd /etc/portage/package.use
+nano kernel
+add the following:
+sys-kernel/gentoo-sources symlink
+save
+emerge --ask sys-kernel/gentoo-sources
+ls -l /usr/src/linux
+emerge --ask sys-apps/pciutils
+emerge --ask sys-kernel/genkernel
+nano -w /etc/fstab
+
+# /etc/fstab: static file system information.
+#
+# noatime turns off atimes for increased performance (atimes normally aren't 
+# needed); notail increases performance of ReiserFS (at the expense of storage 
+# efficiency).  It's safe to drop the noatime options if you want and to 
+# switch between notail / tail freely.
+#
+# The root filesystem should have a pass number of either 0 or 1.
+# All other filesystems should have a pass number of 0 or greater than 1.
+#
+# See the manpage fstab(5) for more information.
+#
+
+# <fs>			<mountpoint>	<type>		<opts>		<dump/pass>
+
+# NOTE: If your BOOT partition is ReiserFS, add the notail option to opts.
+#
+# NOTE: Even though we list ext4 as the type here, it will work with ext2/ext3
+#       filesystems.  This just tells the kernel to use the ext4 driver.
+#
+# NOTE: You can use full paths to devices like /dev/sda3, but it is often
+#       more reliable to use filesystem labels or UUIDs. See your filesystem
+#       documentation for details on setting a label. To obtain the UUID, use
+#       the blkid(8) command.
+
+/dev/sda2		/boot		ext2		noauto,noatime	1 2
+/dev/sda4		/		ext4		noatime		0 1
+/dev/sda3		none		swap		sw		0 0
+/dev/sdb1		/home		ext4		noatime		0 1
+/dev/cdrom		/mnt/cdrom	auto		noauto,ro	0 0
+save
+cat /etc/fstab (to check)
+genkernel --menuconfig all
+activate the following modules:
+alsa pulseaudio xorg wifi anything intel
+usb2, 3, mass storage
+lm_sensors
+core 2/newer xeon
+premptible latency
+change local version -rulebend3r
+change host name
+etc etc
+save as .config-rulebend3r
+emerge --ask sys-kernel/linux-firmware
+nano -w /etc/conf.d/hostname
+add desired hostname
+save
+emerge --ask --noreplace net-misc/netifrc
+ifconfig (write down your network identifier) enp3s0
+nano -w /etc/conf.d/net
+add the following:
+config_enp3s0="dhcp"
+save
+cd /etc/init.d
+ln -s net.lo net.enp3s0
+rc-update add net.enp3s0 default
+nano -w /etc/hosts
+add desired name
+save
+emerge --ask sys-apps/pcmciautils
+passwd
+emerge -av syslog-ng cronie mlocate
+rc-update add syslog-ng cronie sshd default
+emerge --av dhcpcd iproute2 net-tools wireless-tools iw gentoolkit
+emerge --ask --verbose sys-boot/grub:2 os-prober
+grub-install /dev/sda
+grub-mkconfig -o /boot/grub/grub.cfg
+exit
+umount -l /mnt/gentoo/dev{/shm,/pts,}
+umount -R /mnt/gentoo
+reboot
+Login: root
+Password:
+cat /etc/group
+useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape,usb,input,portage,locate,plugdev -s /bin/bash rulebend3r
+passwd rulebend3r
+rm /stage3-*.tar.bz2*
+emerge -uvDNa --with-bdeps=y @world
+cd /etc/portage/package.use
+nano -w sudo
+add the following:
+app-admin/sudo offensive
+save
+emerge -av app-admin/sudo
+EDITOR=nano visudo
+uncomment wheel
+save
+reboot
+Login: rulebend3r
+Password:
+sudo su
+emerge -av xorg-X11 xorg-drivers xorg-server twm xterm
+emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins alsa-mixer gst-plugins-alsa pulseaudio pavucontrol
+euse -E alsa
+/etc/init.d/alsasound start
+rc-update add alsasound boot
+alsamixer (unmute/set volume on desired channels)
+speaker-test -t wav -c 2 (ctrl + c to kill)
+emerge -av sys-fs/udev sys-auth/consolekit
+rc-update add udev consolekit default
+cd /etc/portage/
+mkdir package.unmask package.keywords package,license
+cd package.keywords
+nano zz-misc-keywords
+add a # and save
+cd ..
+cd package.use
+nano zz-misc-use
+add a # and save
+cd ..
+nano make.conf
+uncomment XFCE_PLUGINS
+save
+emerge -av xfce-base/xfce4-meta xfce-extra/xfce4-notifyd
+emerge -av --deselect=y xfce-extra/xfce4-notifyd
+emerge -av xfce4-terminal xfce4-alsa-plugin xfce4-volumed gtk-engines-xfce thunar thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman
+emerge -av gksu
+emerge -av xfce4-mixer xfce4-power-manager
+exit
+logout
+login as non-root user
+nano .xinitrc
+add the following:
+ck-launch-session dbus-launch --sh-syntax --exit-with-session xfce4-session
+save
+reboot
+login as user
+startx
+launch terminal
+sudo su
+emerge -av eix
+cd /etc/eixrc
+nano 00-eixrc
+at end of file add the following:
+EIX_LIMIT=0
+save
+emerge-webrsync
+sudo eix-sync
+emerge -uvDNa --with-bdeps=y @world
+make package.use files and install the following packages:
+git
+conky
+chromium
+telnet-bsd
+genlop
+layman
+htop
+glances
+rxvt-unicode
+screenshooter
+libreoffice
+gimp
+gparted
+ristretto
+tumbler
+mpd
+mpv
+ncmpcpp
+clipgrab
+imsettings
+kodi
+networkmanager
+nm-applet
+xarchiver
+zip
+unzip
+p7zip
+unrar
+guake
+cmatrix
+sl
+adobe-flash
+jdk icedtea icedtea-web
+python-updater
+hddtemp
+lm_sensors
+tmux
+zsh
+vim
+as user in home folder:
+mkdir Git
+cd Git
+git clone https://github.com/rulebend3r/rulebend3r_desktop.git
+put your files where they belong
+sudo su
+cd /var/lib/layman
+vim make.conf
+add the following:
+PORTDIR_OVERLAY="
+
+$PORTDIR_OVERLAY
+"
+save
+cd /etc/portage
+vim make.conf
+uncomment source /var/lib/layman/make.conf
+save
+layman -L
+layman -a mv raiagent voyageur
+sudo eix-sync
+cd /etc/portage/package.mask
+vim overlays
+add the following:
+*/*::mv
+save
+cd ..
+cd package.unmask
+vim zsh-syntax-highlighting
+add the following:
+app-shells/zsh-syntax-highlighting::mv
+save
+emerge -av zsh-syntax-highlighting asciiquarium powerline powerline-symbols powerline-vim
+
+carry on fucker!
