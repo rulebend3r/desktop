@@ -82,6 +82,7 @@ DISTDIR="${PORTDIR}/distfiles"
 PKGDIR="${PORTDIR}/packages"
 save
 mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
+select a mirror and save
 mkdir /mnt/gentoo/etc/portage/repos.conf
 cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
 cp -L /etc/resolv.conf /mnt/gentoo/etc/
@@ -97,7 +98,8 @@ emerge-webrsync
 emerge --sync
 eselect news list
 eselect news read
-eselect profile set 3
+eselect profile list
+eselect profile set 3 (or which ever you prefer)
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
 nano -w /etc/locale.gen (uncomment en_US.UTF-8 UTF-8)
@@ -115,7 +117,7 @@ ls -l /usr/src/linux
 emerge --ask sys-apps/pciutils
 emerge --ask sys-kernel/genkernel
 nano -w /etc/fstab
-
+add the following:
 # /etc/fstab: static file system information.
 #
 # noatime turns off atimes for increased performance (atimes normally aren't 
@@ -150,33 +152,33 @@ save
 cat /etc/fstab (to check)
 genkernel --menuconfig all
 activate the following modules:
-alsa pulseaudio xorg wifi anything intel
+alsa pulseaudio lm_sensors xorg wifi anything intel
 usb2, 3, mass storage
-lm_sensors
 core 2/newer xeon
 premptible latency
 change local version -rulebend3r
-change host name
-etc etc
-save as .config-rulebend3r
+change hostname
+whatever applies to your machine etc etc
+save as .config-whatever username is
 emerge --ask sys-kernel/linux-firmware
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
 emerge --ask --noreplace net-misc/netifrc
-ifconfig (write down your network identifier) enp3s0
+ifconfig (write down your network identifier) for me its enp3s0
 nano -w /etc/conf.d/net
 add the following:
-config_enp3s0="dhcp"
+config_enp3s0="dhcp" (use whatever your network identifier is in place of enp3s0)
 save
 cd /etc/init.d
-ln -s net.lo net.enp3s0
-rc-update add net.enp3s0 default
+ln -s net.lo net.enp3s0 (use whatever your network identifier is in place of enp3s0)
+rc-update add net.enp3s0 default (use whatever your network identifier is in place of enp3s0)
 nano -w /etc/hosts
 add desired name
 save
 emerge --ask sys-apps/pcmciautils
 passwd
+create new root password
 emerge -av syslog-ng cronie mlocate
 rc-update add syslog-ng cronie sshd default
 emerge --av dhcpcd iproute2 net-tools wireless-tools iw gentoolkit
@@ -190,8 +192,9 @@ reboot
 Login: root
 Password:
 cat /etc/group
-useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape,usb,input,portage,locate,plugdev -s /bin/bash rulebend3r
-passwd rulebend3r
+useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape,usb,input,portage,locate,plugdev -s /bin/bash rulebend3r (replace rulebend3r with desired username)
+passwd rulebend3r (replace rulebend3r with your new username)
+add new password for new user
 rm /stage3-*.tar.bz2*
 emerge -uvDNa --with-bdeps=y @world
 cd /etc/portage/package.use
@@ -204,8 +207,7 @@ EDITOR=nano visudo
 uncomment wheel
 save
 reboot
-Login: rulebend3r
-Password:
+login as user
 sudo su
 emerge -av xorg-X11 xorg-drivers xorg-server twm xterm
 emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins alsa-mixer gst-plugins-alsa pulseaudio pavucontrol
@@ -236,7 +238,7 @@ emerge -av gksu
 emerge -av xfce4-mixer xfce4-power-manager
 exit
 logout
-login as non-root user
+login as user
 nano .xinitrc
 add the following:
 ck-launch-session dbus-launch --sh-syntax --exit-with-session xfce4-session
@@ -295,7 +297,8 @@ lm_sensors
 tmux
 zsh
 vim
-as user in home folder:
+
+as non-root user in home folder:
 mkdir Git
 cd Git
 git clone https://github.com/rulebend3r/rulebend3r_desktop.git
