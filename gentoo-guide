@@ -1,6 +1,7 @@
 use gparted live usb and wipe drive(s)
 create gpt partition scheme on drive(s)
 boot gentoo live install usb
+setterm -blank 0
 parted -a optimal /dev/sda
 mklabel gpt
 unit mib
@@ -23,7 +24,7 @@ mkpart primary 1 -1
 name 1 home
 print
 quit
-mkfs.vfat -L "grub" /dev/sda1 (may give error. if so dont bother naming it)
+mkfs.vfat -n "GRUB" /dev/sda1 (may give error. if so dont bother naming it)
 mkfs.ext2 -L "boot" /dev/sda2
 mkswap -L "swap" /dev/sda3
 swapon /dev/sda3
@@ -107,15 +108,14 @@ locale-gen
 eselect locale list
 eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) $PS1"
-cd /etc/portage/package.use
-nano kernel
+nano /etc/portage/package.use/kernel
 add the following:
 sys-kernel/gentoo-sources symlink
 save
-emerge --ask sys-kernel/gentoo-sources
+emerge -av sys-kernel/gentoo-sources
 ls -l /usr/src/linux
-emerge --ask sys-apps/pciutils
-emerge --ask sys-kernel/genkernel
+emerge -av sys-apps/pciutils
+emerge -av sys-kernel/genkernel
 nano -w /etc/fstab
 add the following:
 # /etc/fstab: static file system information.
@@ -160,11 +160,11 @@ change local version -rulebend3r
 change hostname
 whatever applies to your machine etc etc
 save as .config-whatever username is
-emerge --ask sys-kernel/linux-firmware
+emerge -av sys-kernel/linux-firmware
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
-emerge --ask --noreplace net-misc/netifrc
+emerge -av --noreplace net-misc/netifrc
 ifconfig (write down your network identifier) for me its enp3s0
 nano -w /etc/conf.d/net
 add the following:
@@ -176,29 +176,31 @@ rc-update add net.enp3s0 default (use whatever your network identifier is in pla
 nano -w /etc/hosts
 add desired name
 save
+cd /
 emerge --ask sys-apps/pcmciautils
 passwd
 create new root password
 emerge -av syslog-ng cronie mlocate
-rc-update add syslog-ng cronie sshd default
+rc-update add syslog-ng default
+rc-update add cronie default
+rc-update add sshd default
 emerge --av dhcpcd iproute2 net-tools wireless-tools iw gentoolkit
-emerge --ask --verbose sys-boot/grub:2 os-prober
+emerge -av sys-boot/grub:2 os-prober
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 exit
 umount -l /mnt/gentoo/dev{/shm,/pts,}
 umount -R /mnt/gentoo
 reboot
-Login: root
-Password:
-cat /etc/group
+login as root
+cat /etc/group (from output decide what groups you want your user to have)
 useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape,usb,input,portage,locate,plugdev -s /bin/bash rulebend3r (replace rulebend3r with desired username)
 passwd rulebend3r (replace rulebend3r with your new username)
 add new password for new user
 rm /stage3-*.tar.bz2*
 emerge -uvDNa --with-bdeps=y @world
-cd /etc/portage/package.use
-nano -w sudo
+reboot
+nano -w /etc/portage/package.use/sudo
 add the following:
 app-admin/sudo offensive
 save
@@ -206,18 +208,19 @@ emerge -av app-admin/sudo
 EDITOR=nano visudo
 uncomment wheel
 save
-reboot
+exit
 login as user
 sudo su
-emerge -av xorg-X11 xorg-drivers xorg-server twm xterm
+emerge -av xorg-x11 xorg-drivers xorg-server twm xterm
 emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins alsa-mixer gst-plugins-alsa pulseaudio pavucontrol
 euse -E alsa
 /etc/init.d/alsasound start
 rc-update add alsasound boot
-alsamixer (unmute/set volume on desired channels)
+alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
 emerge -av sys-fs/udev sys-auth/consolekit
-rc-update add udev consolekit default
+rc-update add udev default
+rc-update add consolkit default
 cd /etc/portage/
 mkdir package.unmask package.keywords package,license
 cd package.keywords
@@ -237,14 +240,11 @@ emerge -av xfce4-terminal xfce4-alsa-plugin xfce4-volumed gtk-engines-xfce thuna
 emerge -av gksu
 emerge -av xfce4-mixer xfce4-power-manager
 exit
-logout
 login as user
 nano .xinitrc
 add the following:
 ck-launch-session dbus-launch --sh-syntax --exit-with-session xfce4-session
 save
-reboot
-login as user
 startx
 launch terminal
 sudo su
@@ -298,7 +298,8 @@ tmux
 zsh
 vim
 
-as non-root user in home folder:
+launch 2nd xfce4-terminal
+as user:
 mkdir Git
 cd Git
 git clone https://github.com/rulebend3r/rulebend3r_desktop.git
