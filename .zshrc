@@ -138,6 +138,7 @@ alias Awesome='sudo /home/rulebend3r/Scripts/awesome.sh'
 
 ## Fun
 alias aq='asciiquarium'
+alias kitty='oneko'
 
 ## Conky
 alias eC='vim ~/.conkyrc'
@@ -384,6 +385,7 @@ alias Power='sudo powertop'
 
 ## Misc
 alias x='exit'
+alias xset='xsetroot -cursor_name left_ptr'
 alias SX='startx'
 alias H='htop'
 alias G='glances -t 0.1'
