@@ -194,7 +194,7 @@ umount -R /mnt/gentoo
 reboot
 login as root
 cat /etc/group (from output decide what groups you want your user to have)
-useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape,usb,input,portage,locate,plugdev -s /bin/bash rulebend3r (replace rulebend3r with desired username)
+useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape,usb,input,portage,locate -s /bin/bash rulebend3r (replace rulebend3r with desired username)
 passwd rulebend3r (replace rulebend3r with your new username)
 add new password for new user
 rm /stage3-*.tar.bz2*
