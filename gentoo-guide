@@ -220,7 +220,7 @@ alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
 emerge -av sys-fs/udev sys-auth/consolekit
 rc-update add udev default
-rc-update add consolkit default
+rc-update add consolekit default
 cd /etc/portage/
 mkdir package.unmask package.keywords package,license
 cd package.keywords
@@ -241,7 +241,7 @@ emerge -av gksu
 emerge -av xfce4-mixer xfce4-power-manager
 exit
 login as user
-nano .xinitrc
+sudo nano -w .xinitrc
 add the following:
 ck-launch-session dbus-launch --sh-syntax --exit-with-session xfce4-session
 save
