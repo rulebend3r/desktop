@@ -257,7 +257,7 @@ save
 emerge-webrsync
 sudo eix-sync
 emerge -uvDNa --with-bdeps=y @world
-make package.use files and install the following packages:
+make package.use files and_ install the following packages:
 git
 conky
 chromium
