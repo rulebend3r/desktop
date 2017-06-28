@@ -246,7 +246,7 @@ add the following:
 ck-launch-session dbus-launch --sh-syntax --exit-with-session xfce4-session
 save
 startx
-launch terminal
+launch terminal (font color #BF8CFF)
 sudo su
 emerge -av eix
 cd /etc/eixrc
