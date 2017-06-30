@@ -172,6 +172,7 @@ alias bz='tar -xvjf'
 alias bz2='tar -jxvf'
 
 ## Gentoo
+alias dep='emerge --ask --verbose --depclean'
 alias HowLong='genlop -t'
 alias OneShot='emerge --oneshot portage'
 alias Rebuild='revdep-rebuild -v'
