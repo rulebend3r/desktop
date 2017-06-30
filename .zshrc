@@ -173,16 +173,15 @@ alias bz2='tar -jxvf'
 
 ## Gentoo
 alias dep='emerge --ask --verbose --depclean'
-alias HowLong='genlop -t'
+alias genlop='genlop -t'
 alias OneShot='emerge --oneshot portage'
 alias Rebuild='revdep-rebuild -v'
 alias Sync='time emerge --sync'
 alias S='emerge -s'
-alias I='time emerge -av'
+alias E='time emerge -av'
 alias EU='time emerge --ask --verbose --update --newuse --deep @world'
 alias EUB='time emerge --ask --verbose --newuse --update --deep --with-bdeps=y @world'
 alias SES='sudo eix-sync'
-alias Eupdate='eix --update'
 alias cdP='cd /etc/portage && sudo su'
 alias cdU='cd /etc/portage/package.use && sudo su'
 alias cdB='cd /etc/portage/package.mask && sudo su'
@@ -192,8 +191,8 @@ alias EW='emerge-webrsync'
 alias eup='etc-update'
 
 ## Portage
-alias F='sudo tail -f /var/log/emerge-fetch.log'
-alias E='sudo tail -f /var/log/emerge.log'
+alias FL='sudo tail -f /var/log/emerge-fetch.log'
+alias EL='sudo tail -f /var/log/emerge.log'
 
 ## Manjaro
 alias Man-mirrors='sudo pacman-mirrors -g && sudo pacman -Syy'
