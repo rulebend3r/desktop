@@ -177,7 +177,7 @@ nano -w /etc/hosts
 add desired name
 save
 cd /
-emerge --ask sys-apps/pcmciautils
+emerge -av sys-apps/pcmciautils
 passwd
 create new root password
 emerge -av syslog-ng cronie mlocate
@@ -222,7 +222,7 @@ emerge -av sys-fs/udev sys-auth/consolekit
 rc-update add udev default
 rc-update add consolekit default
 cd /etc/portage/
-mkdir package.unmask package.keywords package,license
+mkdir package.unmask package.keywords package.license
 cd package.keywords
 nano zz-misc-keywords
 add a # and save
@@ -234,6 +234,7 @@ cd ..
 nano make.conf
 uncomment XFCE_PLUGINS
 save
+cd /home/rulebend3r
 emerge -av xfce-base/xfce4-meta xfce-extra/xfce4-notifyd
 emerge -av --deselect=y xfce-extra/xfce4-notifyd
 emerge -av xfce4-terminal xfce4-alsa-plugin xfce4-volumed gtk-engines-xfce thunar thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman
