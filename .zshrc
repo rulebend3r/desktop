@@ -89,6 +89,7 @@ alias toggle-wifi='sudo ifconfig wlan0 down && sudo ifconfig wlan0 up'
 alias audit='lynis --auditor rulebend3r'
 alias Minimal='~/Scripts/minimal.sh'
 alias SR='sudo reboot'
+alias blank='setterm -blank 0'
 
 # Programming
 alias cdProg='cd ~/Dropbox/Programming'
