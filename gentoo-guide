@@ -20,8 +20,12 @@ quit
 parted -a optimal /dev/sdb
 mklabel gpt
 unit mib
-mkpart primary 1 -1
+mkpart primary 1 749055
 name 1 home
+mkpart primary 749055 851455
+name 2 slackware
+mkpart primary 851455 -1
+name 3 arch
 print
 quit
 mkfs.vfat -n "GRUB" /dev/sda1 (may give error. if so dont bother naming it)
