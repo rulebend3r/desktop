@@ -154,7 +154,7 @@ add the following:
 /dev/cdrom		/mnt/cdrom	auto		noauto,ro	0 0
 save
 cat /etc/fstab (to check)
-genkernel --menuconfig all
+genkernel --makeopts=-j9 --menuconfig all
 activate the following modules:
 alsa pulseaudio lm_sensors xorg wifi anything intel
 usb2, 3, mass storage
