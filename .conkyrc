@@ -68,19 +68,20 @@ override_utf8_locale no
 TEXT
 ${color #5b6dad}$nodename-XFCE4    ${alignc}$sysname $kernel ${alignr}${time %l:%M %p}
 ${color #5b6dad}$hr
-${color #5b6dad}System: gentoo-rulebend3r Linux 4.9.16-gentoo
+${color #5b6dad}System: gentoo-rulebend3r Linux 4.12.12-gentoo
 ${color #5b6dad} Uptime:${color #7f8ed3} $uptime ${color #5b6dad}- Load:${color #7f8ed3} $loadavg
-${color #5b6dad} CPU Frequency:${color #7f8ed3} ${freq_g} Ghz ${color #5b6dad} Maximum:${color #7f8ed3} $freq_g Ghz
+${color #5b6dad} CPU Frequency:${color #7f8ed3} ${freq_g} Ghz ${color #5b6dad} Maximum:${color #7f8ed3} 4.00 Ghz
 ${color #5b6dad} CPU Usage:${color #7f8ed3} $cpu% ${cpubar}
 ${color #000000}${cpugraph cpu0 32,309 000000 7f8ed3}
 ${color #5b6dad} RAM Usage:${color #7f8ed3} $mem/$memmax - $memperc% ${membar}
 ${color #5b6dad} Swap Usage:${color #7f8ed3} $swap/$swapmax - $swapperc% ${swapbar}
 ${color #5b6dad} Processes:${color #7f8ed3} $processes  ${color #5b6dad}Running:${color #7f8ed3} $running_processes
+${color #5b6dad} Entropy: ${color #7f8ed3}${entropy_avail}${color #7f8ed3}/${color #7f8ed3}${entropy_poolsize} ${color #7f8ed3}${entropy_bar}
 ${color #5b6dad}$hr
 ${color #5b6dad}File Systems:
- ${color #5b6dad}/root ${color #7f8ed3}${fs_used /}/${fs_size /} ${color #7f8ed3}${fs_bar /}
-## ${color #5b6dad}/ home ${color #7f8ed3}${fs_used /home/rulebend3r/}/${fs_size /home/rulebend3r/} ${color #7f8ed3}${fs_bar /home/rulebend3r/}
-## ${color #5b6dad}/ Music ${color #7f8ed3}${fs_used /var/lib/mpd/music/}/${fs_size /var/lib/mpd/music/} ${color #7f8ed3}${fs_bar /var/lib/mpd/music}
+${color #5b6dad}Root ${color #7f8ed3}${fs_used /}/${fs_size /} ${color #7f8ed3}${fs_bar /}
+${color #5b6dad}Home ${color #7f8ed3}${fs_used /home/rulebend3r/}/${fs_size /home/rulebend3r/} ${color #7f8ed3}${fs_bar /home/rulebend3r/}
+#${color #5b6dad}Music ${color #7f8ed3}${fs_used /home/rulebend3r/Music}/${fs_size /home/rulebend3r/Music} ${color #7f8ed3}${fs_bar /home/rulebend3r/Music}
 
 ${color #5b6dad}Name               PID    CPU%   MEM%
 ${color #7f8ed3} ${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
@@ -134,8 +135,6 @@ ${color #5b6dad}$hr
 
 
 
-
-
 ${color #5b6dad}$hr
 
 ${color #5b6dad}${alignc}MPD/NCMPCPP
@@ -148,5 +147,5 @@ ${color #7f8ed3}${alignc}$mpd_status
 
 ${color #5b6dad}$hr
 
-${image /home/rulebend3r/Pictures/gentoologo.png -p 40,688 -s 230x230}
+${image /home/rulebend3r/Pictures/gentoologo.png -p 42,706 -s 220x220}
 ${image /home/rulebend3r/Pictures/gentoologo.png -p 76,0 -s 15x15}
