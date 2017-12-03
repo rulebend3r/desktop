@@ -5,7 +5,7 @@ URxvt.iso14755_52: off
 URxvt.meta8: true
 URxvt.depth: 32
 URxvt.iconFile: /usr/share/icons/Humanity/apps/128/utilities-terminal.svg
-URxvt.metaSendsEscape: truee
+URxvt.metaSendsEscape: true
 
 URxvt.internalBorder: 0
 URxvt.externalBorder: 0
@@ -46,11 +46,11 @@ URxvt.keysym.Control-Right:    \033[1;5C
 !URxvt.letterSpace: -1
 
 !!DejaVu Sans
-!URxvt.font: xft:Dejavu Sans Mono for Powerline:pixelsize=16:antialias=true:hinting=true
-!URxvt.boldFont: xft:DejaVu Sans Mono for Powerline:bold:pixelsize=16:antialias=true:hinting=true
-!URxvt.italicFont: xft:DejaVu Sans Mono for Powerline:italic:pixelsize=16:antialias=true:hinting=true
-!URxvt.boldItalicFont: xft:DejaVu Sans Mono for Powerline:bold:italic:pixelsize=16:antialias=true
-!URxvt.letterSpace: -1
+URxvt.font: xft:Dejavu Sans Mono for Powerline:pixelsize=10:antialias=true:hinting=true
+URxvt.boldFont: xft:DejaVu Sans Mono for Powerline:bold:pixelsize=10:antialias=true:hinting=true
+URxvt.italicFont: xft:DejaVu Sans Mono for Powerline:italic:pixelsize=10:antialias=true:hinting=true
+URxvt.boldItalicFont: xft:DejaVu Sans Mono Bold for Powerline:bold:italic:pixelsize=10:antialias=true
+URxvt.letterSpace: 0
 
 !!!Droid Sans
 !URxvt.font: xft:Droid Sans Mono for Powerline:pixelsize=20:antialias=true:hinting=true
@@ -60,11 +60,11 @@ URxvt.keysym.Control-Right:    \033[1;5C
 !URxvt.letterSpace: -1
 
 !Droid Sans
-URxvt.font: xft:Droid Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
-URxvt.boldFont: xft:Droid Sans Mono for Powerline:bold:pixelsize=12:antialias=true:hinting=true
-URxvt.italicFont: xft:Droid Sans Mono for Powerline:italic:pixelsize=12:antialias=true:hinting=true
-URxvt.boldItalicFont: xft:Droid Sans Mono for Powerline:bold:italic:pixelsize=12:antialias=true
-URxvt.letterSpace: -1
+!URxvt.font: xft:ProFont for Powerline:pixelsize=14:antialias=true:hinting=true
+!URxvt.boldFont: xft:ProFont for Powerline:bold:pixelsize=14:antialias=true:hinting=true
+!URxvt.italicFont: xft:ProFont for Powerline:italic:pixelsize=14:antialias=true:hinting=true
+!URxvt.boldItalicFont: xft:ProFont Bold for Powerline:bold:italic:pixelsize=14:antialias=true
+!URxvt.letterSpace: -1
 
 !! Monofur
 !URxvt.font: xft:Monofur for Powerline:pixelsize=20:antialias=true:hinting=true
