@@ -10,11 +10,11 @@ name 1 grub
 set 1 bios_grub on
 mkpart primary 3 515
 name 2 boot
+set 2 boot on
 mkpart primary 515 16900
 name 3 swap
 mkpart primary 16900 -1
 name 4 root
-set 2 boot on
 print
 quit
 parted -a optimal /dev/sdb
@@ -23,7 +23,7 @@ unit mib
 mkpart primary 1 749055
 name 1 home
 mkpart primary 749055 851455
-name 2 slackware
+name 2 LFS
 mkpart primary 851455 -1
 name 3 arch
 print
@@ -64,7 +64,7 @@ CHOST="x86_64-pc-linux-gnu"
 # These are the USE and USE_EXPAND flags that were used for
 # buidling in addition to what is provided by the profile.
 
-USE="X threads gstreamer upower dbus jpeg png svg lock session startup-notification thunar udev dvd cdr usb pulseaudio alsa python gtk gtk2 gtk3 icu networkmanager lm_sensors mmx sse sse2 -qt4 -qt5 -kde -gnome"
+USE="X threads gstreamer upower dbus jpeg png svg lock session startup-notification thunar udev dvd cdr usb pulseaudio alsa python gtk gtk2 gtk3 icu networkmanager lm_sensors mmx sse sse2 -systemd -qt4 -qt5 -kde -gnome"
 
 #source /var/lib/layman/make.conf
 
@@ -98,20 +98,20 @@ mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
-export PS1="(chroot) $PS1"
+export PS1="(chroot) ${PS1}"
 emerge-webrsync
 emerge --sync
 eselect news list
 eselect news read
 eselect profile list
-eselect profile set 3 (or which ever you prefer)
+eselect profile set 15 (or which ever you prefer)
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
 nano -w /etc/locale.gen (uncomment en_US.UTF-8 UTF-8)
 locale-gen
 eselect locale list
 eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
-env-update && source /etc/profile && export PS1="(chroot) $PS1"
+env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 nano /etc/portage/package.use/kernel
 add the following:
 sys-kernel/gentoo-sources symlink
@@ -147,11 +147,11 @@ add the following:
 #       documentation for details on setting a label. To obtain the UUID, use
 #       the blkid(8) command.
 
-/dev/sda2		/boot		ext2		noauto,noatime	1 2
-/dev/sda4		/		ext4		noatime		0 1
-/dev/sda3		none		swap		sw		0 0
-/dev/sdb1		/home		ext4		noatime		0 1
-/dev/cdrom		/mnt/cdrom	auto		noauto,ro	0 0
+/dev/sda2		/boot		    ext2		noauto,noatime	1 2
+/dev/sda4		/		        ext4		noatime		0 1
+/dev/sda3		none		    swap		sw		0 0
+/dev/sdb1		/home		    ext4		noatime		0 1
+/dev/cdrom	/mnt/cdrom	auto		noauto,ro	0 0
 save
 cat /etc/fstab (to check)
 genkernel --makeopts=-j9 --menuconfig all
@@ -203,7 +203,6 @@ passwd rulebend3r (replace rulebend3r with your new username)
 add new password for new user
 rm /stage3-*.tar.bz2*
 emerge -uvDNa --with-bdeps=y @world
-reboot
 nano -w /etc/portage/package.use/sudo
 add the following:
 app-admin/sudo offensive
@@ -212,7 +211,7 @@ emerge -av app-admin/sudo
 EDITOR=nano visudo
 uncomment wheel
 save
-exit
+reboot
 login as user
 sudo su
 emerge -av xorg-x11 xorg-drivers xorg-server twm xterm
@@ -222,7 +221,6 @@ euse -E alsa
 rc-update add alsasound boot
 alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
-emerge -av sys-fs/udev sys-auth/consolekit
 rc-update add udev default
 rc-update add consolekit default
 cd /etc/portage/
@@ -241,9 +239,7 @@ save
 cd /home/rulebend3r
 emerge -av xfce-base/xfce4-meta xfce-extra/xfce4-notifyd
 emerge -av --deselect=y xfce-extra/xfce4-notifyd
-emerge -av xfce4-terminal xfce4-alsa-plugin xfce4-volumed gtk-engines-xfce thunar thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman
-emerge -av gksu
-emerge -av xfce4-mixer xfce4-power-manager
+emerge -av xfce4-terminal gtk-engines-xfce thunar thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman gksu xfce4-power-manager
 exit
 login as user
 sudo nano -w .xinitrc
@@ -263,6 +259,7 @@ emerge-webrsync
 sudo eix-sync
 emerge -uvDNa --with-bdeps=y @world
 make package.use files and_ install the following packages:
+libcaca
 git
 conky
 chromium
@@ -296,7 +293,6 @@ cmatrix
 sl
 adobe-flash
 jdk icedtea icedtea-web
-python-updater
 hddtemp
 lm_sensors
 tmux
