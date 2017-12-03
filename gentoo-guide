@@ -293,7 +293,7 @@ guake
 cmatrix
 sl
 adobe-flash
-jdk icedtea icedtea-web
+jdk icedtea-web
 hddtemp
 lm_sensors
 tmux
