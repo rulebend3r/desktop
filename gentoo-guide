@@ -23,9 +23,9 @@ unit mib
 mkpart primary 1 749055
 name 1 home
 mkpart primary 749055 851455
-name 2 LFS
+name 2 arch
 mkpart primary 851455 -1
-name 3 arch
+name 3 linux
 print
 quit
 mkfs.vfat -n "GRUB" /dev/sda1 (may give error. if so dont bother naming it)
@@ -34,6 +34,8 @@ mkswap -L "swap" /dev/sda3
 swapon /dev/sda3
 mkfs.ext4 -L "root" /dev/sda4
 mkfs.ext4 -L "home" /dev/sdb1
+mkfs.ext4 -L "arch" /dev/sdb2
+mkfs.ext4 -L "linux" /dev/sdb3
 mkdir /mnt/gentoo
 mount /dev/sda4 /mnt/gentoo
 mkdir /mnt/gentoo/boot
