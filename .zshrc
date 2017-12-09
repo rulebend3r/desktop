@@ -140,6 +140,7 @@ alias Awesome='sudo /home/rulebend3r/Scripts/awesome.sh'
 ## Fun
 alias aq='asciiquarium'
 alias kitty='oneko'
+alias ai='ascii-invaders'
 
 ## Conky
 alias eC='vim ~/.conkyrc'
