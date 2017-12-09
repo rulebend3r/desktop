@@ -46,10 +46,10 @@ URxvt.keysym.Control-Right:    \033[1;5C
 !URxvt.letterSpace: -1
 
 !!DejaVu Sans
-URxvt.font: xft:Dejavu Sans Mono for Powerline:pixelsize=10:antialias=true:hinting=true
-URxvt.boldFont: xft:DejaVu Sans Mono for Powerline:bold:pixelsize=10:antialias=true:hinting=true
-URxvt.italicFont: xft:DejaVu Sans Mono for Powerline:italic:pixelsize=10:antialias=true:hinting=true
-URxvt.boldItalicFont: xft:DejaVu Sans Mono Bold for Powerline:bold:italic:pixelsize=10:antialias=true
+URxvt.font: xft:ProFont for Powerline:pixelsize=10:antialias=true:hinting=true
+URxvt.boldFont: xft:ProFont Bold for Powerline:bold:pixelsize=10:antialias=true:hinting=true
+URxvt.italicFont: xft:ProFont for Powerline:italic:pixelsize=10:antialias=true:hinting=true
+URxvt.boldItalicFont: xft:ProFont for Powerline Bold for Powerline:bold:italic:pixelsize=10:antialias=true
 URxvt.letterSpace: 0
 
 !!!Droid Sans
