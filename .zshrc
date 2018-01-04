@@ -102,6 +102,7 @@ alias Redding='wego 4 redding'
 
 # Git
 alias cdG='cd /home/rulebend3r/Git/desktop'
+alias cdGP='cd /home/rulebend3r/Git-Packages'
 alias GitStatus='git status -u no'
 alias GA='git add'
 alias GC='git commit -m'
@@ -792,11 +793,14 @@ clear
 screenfetch
 
 #Gentoo#
-source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #Arch#
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #Kali#
 #source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#Linux From Scratch#
+source /home/rulebend3r/Git-Packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
