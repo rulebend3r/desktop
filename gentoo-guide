@@ -340,4 +340,4 @@ save
 emerge -av zsh-syntax-highlighting asciiquarium powerline powerline-symbols powerline-vim
 as user in home directory:
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-carry on fucker!!
+
