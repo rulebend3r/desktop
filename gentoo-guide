@@ -10,7 +10,7 @@ name 1 grub
 set 1 bios_grub on
 mkpart primary 3 515
 name 2 boot
-set 2 boot on
+set 2 BOOT on
 mkpart primary 515 16900
 name 3 swap
 mkpart primary 16900 -1
@@ -35,7 +35,7 @@ swapon /dev/sda3
 mkfs.ext4 -L "root" /dev/sda4
 mkfs.ext4 -L "home" /dev/sdb1
 mkfs.ext4 -L "arch" /dev/sdb2
-mkfs.ext4 -L "linux" /dev/sdb3
+mkfs.ext4 -L "lfs" /dev/sdb3
 mkdir /mnt/gentoo
 mount /dev/sda4 /mnt/gentoo
 mkdir /mnt/gentoo/boot
@@ -47,7 +47,7 @@ cd /mnt/gentoo
 links https://www.gentoo.org/downloads/mirrors/
 navigate to and download stage3
 exit links
-tar xvjpf stage3-*.tar.bz2 --xattrs --numeric-owner
+tar xvpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 nano -w /mnt/gentoo/etc/portage/make.conf
 add the following:
 # These settings were set by the catalyst build script that automatically
@@ -90,10 +90,10 @@ PKGDIR="${PORTDIR}/packages"
 save
 mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
 select a mirror and save
-mkdir /mnt/gentoo/etc/portage/repos.conf
+mkdir --parents /mnt/gentoo/etc/portage/repos.conf
 cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
-cp -L /etc/resolv.conf /mnt/gentoo/etc/
-mount -t proc /proc /mnt/gentoo/proc
+cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+mount --types proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
 mount --make-rslave /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
@@ -106,7 +106,8 @@ emerge --sync
 eselect news list
 eselect news read
 eselect profile list
-eselect profile set 15 (or which ever you prefer)
+eselect profile set 16 (or which ever you prefer)
+emerge -uvDNa --with-bdeps=y @world
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
 nano -w /etc/locale.gen (uncomment en_US.UTF-8 UTF-8)
@@ -152,7 +153,7 @@ add the following:
 /dev/sda2		/boot		    ext2		noauto,noatime	1 2
 /dev/sda4		/		        ext4		noatime		0 1
 /dev/sda3		none		    swap		sw		0 0
-/dev/sdb1		/home		    ext4		noatime		0 1
+/dev/sdb1		/home		    ext4		noatime		0 2
 /dev/cdrom	/mnt/cdrom	auto		noauto,ro	0 0
 save
 cat /etc/fstab (to check)
@@ -203,7 +204,7 @@ cat /etc/group (from output decide what groups you want your user to have)
 useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape,usb,input,portage,locate -s /bin/bash rulebend3r (replace rulebend3r with desired username)
 passwd rulebend3r (replace rulebend3r with your new username)
 add new password for new user
-rm /stage3-*.tar.bz2*
+rm /stage3-*.tar.xz
 emerge -uvDNa --with-bdeps=y @world
 nano -w /etc/portage/package.use/sudo
 add the following:
@@ -241,7 +242,7 @@ save
 cd /home/rulebend3r
 emerge -av xfce-base/xfce4-meta xfce-extra/xfce4-notifyd
 emerge -av --deselect=y xfce-extra/xfce4-notifyd
-emerge -av xfce4-terminal gtk-engines-xfce thunar thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman gksu xfce4-power-manager
+emerge -av leafpad xfce4-terminal gtk-engines-xfce thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman gksu xfce4-power-manager
 exit
 login as user
 sudo nano -w .xinitrc
