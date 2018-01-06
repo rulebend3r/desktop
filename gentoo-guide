@@ -25,10 +25,10 @@ name 1 home
 mkpart primary 749055 851455
 name 2 arch
 mkpart primary 851455 -1
-name 3 linux
+name 3 lfs
 print
 quit
-mkfs.vfat -n "GRUB" /dev/sda1 (may give error. if so dont bother naming it)
+mkfs.vfat -n "GRUB" /dev/sda1 *this step is optional*
 mkfs.ext2 -L "boot" /dev/sda2
 mkswap -L "swap" /dev/sda3
 swapon /dev/sda3
@@ -36,7 +36,6 @@ mkfs.ext4 -L "root" /dev/sda4
 mkfs.ext4 -L "home" /dev/sdb1
 mkfs.ext4 -L "arch" /dev/sdb2
 mkfs.ext4 -L "lfs" /dev/sdb3
-mkdir /mnt/gentoo
 mount /dev/sda4 /mnt/gentoo
 mkdir /mnt/gentoo/boot
 mount /dev/sda2 /mnt/gentoo/boot
@@ -44,8 +43,8 @@ mkdir /mnt/gentoo/home
 mount /dev/sdb1 /mnt/gentoo/home
 date MMDDhhmmYYYY
 cd /mnt/gentoo
-links https://www.gentoo.org/downloads/mirrors/
-navigate to and download stage3
+links https://www.gentoo.org/downloads
+navigate to and download amd64 stage3 tarball
 exit links
 tar xvpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 nano -w /mnt/gentoo/etc/portage/make.conf
@@ -81,7 +80,6 @@ INPUT_DEVICES="evdev keyboard mouse synaptics"
 #CPU_FLAGS_X86="mmx sse sse2"
 
 ACCEPT_LICENSE="* @EULA"
-LINGUAS="en"
 L10N="en_US"
 
 PORTDIR="/usr/portage"
@@ -261,6 +259,9 @@ save
 emerge-webrsync
 sudo eix-sync
 emerge -uvDNa --with-bdeps=y @world
+
+##everything below is optional and packages that i use##
+
 make package.use files and_ install the following packages:
 libcaca
 git
