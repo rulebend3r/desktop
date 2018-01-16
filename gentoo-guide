@@ -194,14 +194,17 @@ emerge -av sys-boot/grub:2 os-prober
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 exit
+cd
 umount -l /mnt/gentoo/dev{/shm,/pts,}
+umount -R /mnt/gentoo/boot
+umount -R /mnt/gentoo/home
 umount -R /mnt/gentoo
 reboot
 login as root
-cat /etc/group (from output decide what groups you want your user to have)
+cat /etc/group (from output decide what groups you want to add your user to)
 useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape,usb,input,portage,locate -s /bin/bash rulebend3r (replace rulebend3r with desired username)
 passwd rulebend3r (replace rulebend3r with your new username)
-add new password for new user
+add new password for new username
 rm /stage3-*.tar.xz
 emerge -uvDNa --with-bdeps=y @world
 nano -w /etc/portage/package.use/sudo
