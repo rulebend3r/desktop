@@ -218,7 +218,7 @@ save
 reboot
 login as user
 sudo su
-emerge -av xorg-x11 xorg-drivers xorg-server twm xterm
+emerge -av xorg-x11 xorg-drivers xorg-server twm xterm xclock
 emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins alsa-mixer gst-plugins-alsa pulseaudio pavucontrol
 euse -E alsa
 /etc/init.d/alsasound start
