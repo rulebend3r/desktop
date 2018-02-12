@@ -164,7 +164,7 @@ premptible latency
 change local version -rulebend3r
 change hostname
 whatever applies to your machine etc etc
-save as .config-whatever username is
+save as .config
 emerge -av sys-kernel/linux-firmware
 nano -w /etc/conf.d/hostname
 add desired hostname
@@ -286,6 +286,7 @@ tumbler
 mpd
 mpv
 ncmpcpp
+pidgin
 clipgrab
 imsettings
 kodi
