@@ -140,6 +140,7 @@ alias Awesome='sudo /home/rulebend3r/Scripts/awesome.sh'
 
 ## Fun
 alias aq='asciiquarium'
+alias aqg='asciiquarium-git'
 alias kitty='oneko'
 alias ai='ascii-invaders'
 
@@ -376,7 +377,7 @@ alias net-wifi='wavemon'
 alias net-nmon='nmon'
 alias net-speedtest='speedtest-cli'
 alias net-graph='speedometer -r eno1-t eno1'
-alias graph='nbwmon -i eno1'
+alias nbw='nbwmon -i enp3s0'
 alias iftop='sudo iftop -p -n'
 alias slurm='slurm -i eno1'
 alias ping='ping -c 3 8.8.8.8'
@@ -393,7 +394,7 @@ alias SX='startx'
 alias H='htop'
 alias G='glances -t 1'
 alias SS='sudo su'
-alias CM='cmatrix'
+alias cm='unimatrix -s 90'
 alias biguns='~/Scripts/biguns.sh'
 alias flux='xflux -z 94596'
 alias Redshift='sudo redshift -l 37.9:122.1'
@@ -793,7 +794,7 @@ clear
 screenfetch
 
 #Gentoo#
-#source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #Arch#
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -802,5 +803,5 @@ screenfetch
 #source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #Linux From Scratch#
-source /home/rulebend3r/Git-Packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /home/rulebend3r/Git-Packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
