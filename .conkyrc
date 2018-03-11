@@ -66,9 +66,9 @@ override_utf8_locale no
 # stuff after 'TEXT' will be formatted on screen
 
 TEXT
-${color #5b6dad}$nodename-XFCE4    ${alignc}$sysname $kernel ${alignr}${time %l:%M %p}
+${color #5b6dad}$nodename    ${alignc}$sysname $kernel ${alignr}${time %l:%M %p}
 ${color #5b6dad}$hr
-${color #5b6dad}System: gentoo-rulebend3r Linux 4.12.12-gentoo
+${color #5b6dad}System: Gentoo Linux 4.15.8-gentoo-rulebend3r
 ${color #5b6dad} Uptime:${color #7f8ed3} $uptime ${color #5b6dad}- Load:${color #7f8ed3} $loadavg
 ${color #5b6dad} CPU Frequency:${color #7f8ed3} ${freq_g} Ghz ${color #5b6dad} Maximum:${color #7f8ed3} 4.00 Ghz
 ${color #5b6dad} CPU Usage:${color #7f8ed3} $cpu% ${cpubar}
@@ -147,5 +147,5 @@ ${color #7f8ed3}${alignc}$mpd_status
 
 ${color #5b6dad}$hr
 
-${image /home/rulebend3r/Pictures/gentoologo.png -p 42,706 -s 220x220}
-${image /home/rulebend3r/Pictures/gentoologo.png -p 76,0 -s 15x15}
+${image /home/rulebend3r/Pictures/Gentoo/gentoologo.png -p 42,706 -s 220x220}
+${image /home/rulebend3r/Pictures/Gentoo/gentoologo.png -p 40,0 -s 15x15}
