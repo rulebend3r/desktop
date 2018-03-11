@@ -4,7 +4,7 @@ URxvt.iso14755: false
 URxvt.iso14755_52: off
 URxvt.meta8: true
 URxvt.depth: 32
-URxvt.iconFile: /usr/share/icons/Humanity/apps/128/utilities-terminal.svg
+URxvt.iconFile: /usr/share/icons/NewAzenisIcons/scalable/apps/xfce-terminal.png
 URxvt.metaSendsEscape: true
 
 URxvt.internalBorder: 0
@@ -45,11 +45,11 @@ URxvt.keysym.Control-Right:    \033[1;5C
 !URxvt.boldItalicFont: xft:Inconsolata for Powerline:bold:italic:pixelsize=20:antialias=true
 !URxvt.letterSpace: -1
 
-!!DejaVu Sans
-URxvt.font: xft:ProFont for Powerline:pixelsize=10:antialias=true:hinting=true
-URxvt.boldFont: xft:ProFont Bold for Powerline:bold:pixelsize=10:antialias=true:hinting=true
-URxvt.italicFont: xft:ProFont for Powerline:italic:pixelsize=10:antialias=true:hinting=true
-URxvt.boldItalicFont: xft:ProFont for Powerline Bold for Powerline:bold:italic:pixelsize=10:antialias=true
+!!ProFont
+URxvt.font: xft:ProFont for Powerline:pixelsize=12:antialias=true:hinting=true
+URxvt.boldFont: xft:ProFont Bold for Powerline:bold:pixelsize=12:antialias=true:hinting=true
+URxvt.italicFont: xft:ProFont for Powerline:italic:pixelsize=12:antialias=true:hinting=true
+URxvt.boldItalicFont: xft:ProFont for Powerline Bold for Powerline:bold:italic:pixelsize=12:antialias=true
 URxvt.letterSpace: 0
 
 !!!Droid Sans
@@ -59,7 +59,7 @@ URxvt.letterSpace: 0
 !URxvt.boldItalicFont: xft:Droid Sans Mono for Powerline:bold:italic:pixelsize=20:antialias=true
 !URxvt.letterSpace: -1
 
-!Droid Sans
+!!!Profont
 !URxvt.font: xft:ProFont for Powerline:pixelsize=14:antialias=true:hinting=true
 !URxvt.boldFont: xft:ProFont for Powerline:bold:pixelsize=14:antialias=true:hinting=true
 !URxvt.italicFont: xft:ProFont for Powerline:italic:pixelsize=14:antialias=true:hinting=true
