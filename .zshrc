@@ -176,6 +176,7 @@ alias bz='tar -xvjf'
 alias bz2='tar -jxvf'
 
 ## Gentoo
+alias SE='sudo eselect'
 alias dep='emerge --ask --verbose --depclean'
 alias genlop='genlop -t'
 alias OneShot='emerge --oneshot portage'
