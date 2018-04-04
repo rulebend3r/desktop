@@ -194,6 +194,7 @@ alias cdK='cd /etc/portage/package.accept_keywords && sudo su'
 alias eM='sudo vim /etc/portage/make.conf'
 alias EW='emerge-webrsync'
 alias eup='etc-update'
+alias eK='eclean-kernel'
 
 ## Portage
 alias FL='sudo tail -f /var/log/emerge-fetch.log'
