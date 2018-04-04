@@ -244,7 +244,7 @@ cd /home/rulebend3r
 emerge -av xfce-base/xfce4-meta xfce-extra/xfce4-notifyd
 emerge -av --deselect=y xfce-extra/xfce4-notifyd
 emerge -av leafpad xfce4-terminal gtk-engines-xfce thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman gksu xfce4-power-manager
-exit
+reboot
 login as user
 sudo nano -w .xinitrc
 add the following:
