@@ -5,9 +5,9 @@ ZSH_THEME="newpowerline"    #kardan agnoster af-magic bira clean gentoo terminal
 #####################
 ###set consolefont###
 #####################
-if [ $TERM = "linux" ]; then
-    setfont ter-powerline-v16n
-fi
+#if [ $TERM = "linux" ]; then
+#    setfont ter-powerline-v16n
+#fi
 #####################
 
 #POWERLINE_RIGHT_A="date"
@@ -55,12 +55,12 @@ COMPLETION_WAITING_DOTS="true"
 #export NMON=cmknt
 export EDITOR="vim"
 export PAGER="less"
-export BROWSER="opera"
-export BROWSERCLI="w3m"
+export BROWSER="chromium"
+export BROWSERCLI="links"
 export MOVPLAY="mpv"
-export PICVIEW="feh"
+export PICVIEW="ristretto"
 export SNDPLAY="mpv"
-export TERMINAL="uxterm"
+export TERMINAL="xfce4-terminal"
 export PULSE_LATENCY_MSEC=60
 export TERM="xterm-256color"
 
@@ -223,11 +223,11 @@ alias SI='sudo apt-get install'
 alias SAR='sudo apt auto-remove'
 
 ## Awesome 
-alias eA='cd ~/.config/awesome && vim rc.lua'
+alias eRC='cd ~/.config/awesome && vim rc.lua'
 alias eW='cd ~/.config/awesome && vim wi.lua'
-alias eT='cd ~/.config/awesome/themes/rulebend3r && vim theme.lua' 
+alias eRT='cd ~/.config/awesome/themes/rulebend3r && vim theme.lua' 
 alias cdA='cd ~/.config/awesome'
-alias cdD='cd ~/.config/awesome/PROFILES/Default'
+#alias cdD='cd ~/.config/awesome/PROFILES/Default'
 alias cdM='cd ~/.config/awesome/PROFILES/rulebend3r'
 alias cdT='cd ~/.config/awesome/themes/rulebend3r'
 alias BG='~/Scripts/background.sh'
@@ -268,7 +268,7 @@ alias tr='trash-rm'
 alias lsTrash='ls ~/.local/share/Trash/files/'
 alias cdTrash='cd ~/.local/share/Trash/files/'
 alias lD='ls ~/Downloads'
-alias D='cd ~/Downloads'
+alias cdD='cd ~/Downloads'
 
 ## YouTube
 alias cdYT='cd ~/Downloads/YouTube'
