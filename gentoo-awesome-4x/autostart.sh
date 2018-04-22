@@ -8,6 +8,9 @@ function run {
 }
 
 run "compton"
+run "guake"
+run "pidgin"
+
 pkill conky
 
 sleep 3
