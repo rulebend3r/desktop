@@ -145,7 +145,7 @@ alias kitty='oneko'
 alias ai='ascii-invaders'
 
 ## Conky
-alias eC='vim ~/.conkyrc'
+alias eC='vim ~/.config/awesome/conky/conkyrc'
 alias cdC='cd ~/.conky/HUD'
 alias HUD='~/Scripts/start_HUD.sh'
 alias SafeConky='~/Scripts/safe_conky.sh'
