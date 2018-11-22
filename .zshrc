@@ -396,7 +396,9 @@ alias SX='startx'
 alias H='htop'
 alias G='glances -t 1'
 alias SS='sudo su'
-alias cm='unimatrix -s 90'
+alias um='unimatrix -l P -s 90'
+alias cm='cmatrix'
+alias blanking='~/Scripts/blanking.sh'
 alias biguns='~/Scripts/biguns.sh'
 alias flux='xflux -z 94596'
 alias Redshift='sudo redshift -l 37.9:122.1'
@@ -414,6 +416,7 @@ alias info='inxi -F'
 alias Cap='cd ~/Screencasts/Screencaps/ && scrot'
 alias rip='abcde'
 alias vidterm='mplayer -vo caca'
+alias IRC='irssi -c chat.freenode.net'
 #alias graph='gnuplot'
 
 ## Sparklines - CLI visualizations
@@ -783,13 +786,13 @@ iptv-Rueters() {  rtmpdump \
 
 
 plugins=(git archlinux vi-mode themes zsh-completions color-command)
-#source /home/rulebend3r/Git/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_DISABLE_COMPFIX='true'
 source /home/rulebend3r/.oh-my-zsh/oh-my-zsh.sh
 
 clear
 #archey3
 #neofetch
-#/home/rulebend3r/Scripts/pacolor.sh
+#/home/rulebend3r/Scripts/matrix.sh
 #/home/rulebend3r/Scripts/starwars.sh
 #/home/rulebend3r/Scripts/batman.sh
 #/home/rulebend3r/Scripts/invaders1.sh
