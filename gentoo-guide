@@ -13,19 +13,16 @@ name 2 boot
 set 2 BOOT on
 mkpart primary 515 16900
 name 3 swap
-mkpart primary 16900 -1
+mkpart primary 16900 91382
 name 4 root
+mkpart primary 91382 -1 (30 GB for Kali/BlackArch or whatever else you may like)
+name 5 kali
 print
 quit
 parted -a optimal /dev/sdb
-mklabel gpt
 unit mib
-mkpart primary 1 749055
+mkpart primary 1 476936
 name 1 home
-mkpart primary 749055 851455
-name 2 arch
-mkpart primary 851455 -1
-name 3 lfs
 print
 quit
 mkfs.vfat -n "GRUB" /dev/sda1 *this step is optional*
@@ -33,9 +30,8 @@ mkfs.ext2 -L "boot" /dev/sda2
 mkswap -L "swap" /dev/sda3
 swapon /dev/sda3
 mkfs.ext4 -L "root" /dev/sda4
+mkfs.ext4 -L "kali" /dev/sda5
 mkfs.ext4 -L "home" /dev/sdb1
-mkfs.ext4 -L "arch" /dev/sdb2
-mkfs.ext4 -L "lfs" /dev/sdb3
 mount /dev/sda4 /mnt/gentoo
 mkdir /mnt/gentoo/boot
 mount /dev/sda2 /mnt/gentoo/boot
@@ -185,7 +181,10 @@ cd /
 emerge -av sys-apps/pcmciautils
 passwd
 create new root password
-emerge -av syslog-ng cronie mlocate
+nano -w /etc/conf.d/hwclock
+change "UTC" to "local" if dual booting with Windows
+save
+emerge -av syslog-ng cronie mlocate logrotate
 rc-update add syslog-ng default
 rc-update add cronie default
 rc-update add sshd default
@@ -219,12 +218,12 @@ reboot
 login as user
 sudo su
 emerge -av xorg-x11 xorg-drivers xorg-server twm xterm xclock
-emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins alsa-mixer gst-plugins-alsa pulseaudio pavucontrol
-euse -E alsa
+emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins alsa-mixer pulseaudio pavucontrol
+euse -E alsa (if alsa is not flagged globally in make.conf)
 /etc/init.d/alsasound start
-rc-update add alsasound boot
 alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
+rc-update add alsasound boot
 rc-update add udev default
 rc-update add consolekit default
 cd /etc/portage/
@@ -243,7 +242,7 @@ save
 cd /home/rulebend3r
 emerge -av xfce-base/xfce4-meta xfce-extra/xfce4-notifyd
 emerge -av --deselect=y xfce-extra/xfce4-notifyd
-emerge -av leafpad xfce4-terminal gtk-engines-xfce thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman gksu xfce4-power-manager
+emerge -av leafpad xfce4-terminal gtk-engines-xfce thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman gvfs xfce4-power-manager
 reboot
 login as user
 sudo nano -w .xinitrc
@@ -328,7 +327,7 @@ vim make.conf
 uncomment source /var/lib/layman/make.conf
 save
 layman -L
-layman -a mv raiagent voyageur
+layman -a mv raiagent ArtSoftware torbrowser
 sudo eix-sync
 cd /etc/portage/package.mask
 vim overlays
