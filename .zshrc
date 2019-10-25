@@ -5,9 +5,9 @@ ZSH_THEME="newpowerline"    #kardan agnoster af-magic bira clean gentoo terminal
 #####################
 ###set consolefont###
 #####################
-#if [ $TERM = "linux" ]; then
-#    setfont ter-powerline-v16n
-#fi
+if [ $TERM = "linux" ]; then
+    setfont ter-powerline-v12n
+fi
 #####################
 
 #POWERLINE_RIGHT_A="date"
@@ -60,7 +60,7 @@ export BROWSERCLI="links"
 export MOVPLAY="mpv"
 export PICVIEW="ristretto"
 export SNDPLAY="mpv"
-export TERMINAL="xfce4-terminal"
+export TERMINAL="urxvt"
 export PULSE_LATENCY_MSEC=60
 export TERM="xterm-256color"
 
@@ -90,6 +90,8 @@ alias audit='lynis --auditor rulebend3r'
 alias Minimal='~/Scripts/minimal.sh'
 alias SR='sudo reboot'
 alias blank='setterm -blank 0'
+alias AM='alsamixer'
+alias AME='alsamixer -D equal'
 
 # Programming
 alias cdProg='cd ~/Dropbox/Programming'
@@ -136,13 +138,15 @@ alias Cinnamon='sudo /home/rulebend3r/Scripts/cinnamon.sh'
 alias Awesome='sudo /home/rulebend3r/Scripts/awesome.sh'
 
 ## Flash iso to usb drive
-#dd bs=4M if=/path/to/archlinux.iso of=/dev/sdb && sync
+alias DD='dd bs=4M if=/home/rulebend3r/Downloads/install-amd64-minimal-20191020T214501Z.iso of=/dev/sdd status=progress oflag=sync'
+alias wipefs='wipefs --all /dev/sdd'
 
 ## Fun
-alias aq='asciiquarium'
+alias aq='asciiquarium -c'
 alias aqg='asciiquarium-git'
 alias kitty='oneko'
 alias ai='ascii-invaders'
+alias PLC='phoon | lolcat'
 
 ## Conky
 alias eC='vim ~/.config/awesome/conky/conkyrc'
@@ -179,7 +183,7 @@ alias bz2='tar -jxvf'
 alias SE='sudo eselect'
 alias dep='emerge --ask --verbose --depclean'
 alias genlop='genlop -t'
-alias OneShot='emerge --oneshot portage'
+alias OneShot='emerge --ask --verbose --oneshot portage'
 alias Rebuild='revdep-rebuild -v'
 alias Sync='time emerge --sync'
 alias S='emerge -s'
@@ -187,6 +191,7 @@ alias E='time emerge -av'
 alias EU='time emerge --ask --verbose --update --newuse --deep @world'
 alias EUB='time emerge --ask --verbose --newuse --update --deep --with-bdeps=y @world'
 alias SES='sudo eix-sync'
+alias cdE='cd /etc && sudo su'
 alias cdP='cd /etc/portage && sudo su'
 alias cdU='cd /etc/portage/package.use && sudo su'
 alias cdB='cd /etc/portage/package.mask && sudo su'
@@ -195,6 +200,7 @@ alias eM='sudo vim /etc/portage/make.conf'
 alias EW='emerge-webrsync'
 alias eup='etc-update'
 alias eK='eclean-kernel'
+alias GK='genkernel --makeopts=-j9 --menuconfig all'
 
 ## Portage
 alias FL='sudo tail -f /var/log/emerge-fetch.log'
@@ -202,7 +208,6 @@ alias EL='sudo tail -f /var/log/emerge.log'
 
 ## Manjaro
 alias Man-mirrors='sudo pacman-mirrors -g && sudo pacman -Syy'
-
 
 ## Arch
 alias YT='yaourt'
@@ -238,6 +243,9 @@ alias Default='~/Scripts/Theming/default.sh'
 alias 1080='/home/rulebend3r/Scripts/Theming/1080.sh'
 alias 1440='/home/rulebend3r/Scripts/Theming/1440.sh'
 
+## suckless terminal
+alias eST='sudo vim /etc/portage/savedconfig/x11-terms/st-0.8.2'
+
 ## Tmux
 alias TM='tmux'
 alias eTM='vim ~/.tmux.conf'
@@ -269,6 +277,7 @@ alias lsTrash='ls ~/.local/share/Trash/files/'
 alias cdTrash='cd ~/.local/share/Trash/files/'
 alias lD='ls ~/Downloads'
 alias cdD='cd ~/Downloads'
+alias RG='ranger'
 
 ## YouTube
 alias cdYT='cd ~/Downloads/YouTube'
@@ -280,6 +289,7 @@ alias cleanYT='rm ~/Downloads/YouTube/*.*'
 ## X Resources Stuff
 alias eX='vim ~/.Xresources'
 alias XTR='xrdb -merge ~/.Xresources'
+alias XTD='xrdb -merge ~/st/.Xdefaults'
 
 ## Zsh Stuff
 alias eZ='vim ~/.zshrc'
@@ -328,7 +338,7 @@ alias Pods='cd ~/Podcasts && ranger'
 alias music='sh ~/Scripts/music.sh & '
 
 ## Multimedia
-alias irc='cp ~/.weechat/irc.conf.bak ~/.weechat/irc.conf && weechat-curses'
+alias irc='weechat'
 alias M='mpv'
 alias Vids='cd ~/Downloads/.blackbox && ranger'
 
@@ -390,13 +400,15 @@ alias bat-all='acpi -V'
 alias Power='sudo powertop'
 
 ## Misc
+alias ST='sudo thunar'
 alias x='exit'
 alias xset='xsetroot -cursor_name left_ptr'
 alias SX='startx'
 alias H='htop'
 alias G='glances -t 1'
+alias GT='gotop'
 alias SS='sudo su'
-alias um='unimatrix -l P -s 90'
+alias um='unimatrix -a -f -l k -s 90'
 alias cm='cmatrix'
 alias blanking='~/Scripts/blanking.sh'
 alias biguns='~/Scripts/biguns.sh'
@@ -784,19 +796,26 @@ iptv-Rueters() {  rtmpdump \
 ##########################################################
 
 
+#PATH="/home/rulebend3r/perl5/bin${PATH:+:${PATH}}"; export PATH;
+#PERL5LIB="/home/rulebend3r/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+#PERL_LOCAL_LIB_ROOT="/home/rulebend3r/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+#PERL_MB_OPT="--install_base \"/home/rulebend3r/perl5\""; export PERL_MB_OPT;
+#PERL_MM_OPT="INSTALL_BASE=/home/rulebend3r/perl5"; export PERL_MM_OPT;
 
-plugins=(git archlinux vi-mode themes zsh-completions color-command)
+plugins=(git vi-mode themes) #archlinux zsh-completions color-command#
 ZSH_DISABLE_COMPFIX='true'
 source /home/rulebend3r/.oh-my-zsh/oh-my-zsh.sh
 
 clear
 #archey3
 #neofetch
-#/home/rulebend3r/Scripts/matrix.sh
+#/home/rulebend3r/Scripts/tiefighters.sh
 #/home/rulebend3r/Scripts/starwars.sh
 #/home/rulebend3r/Scripts/batman.sh
 #/home/rulebend3r/Scripts/invaders1.sh
-screenfetch
+screenfetch -E
+#phoon | lolcat
+#al-info
 
 #Gentoo#
 source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -809,4 +828,7 @@ source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighti
 
 #Linux From Scratch#
 #source /home/rulebend3r/Git-Packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval $(thefuck --alias)
+
 
