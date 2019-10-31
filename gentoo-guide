@@ -117,6 +117,8 @@ emerge -av sys-kernel/gentoo-sources
 ls -l /usr/src/linux
 emerge -av sys-apps/pciutils
 emerge -av sys-kernel/genkernel
+emerge -av sys-kernel/linux-firmware (if not already installed)
+emerge -av sys-firmware/intel-microcode
 nano -w /etc/fstab
 add the following:
 # /etc/fstab: static file system information.
@@ -161,7 +163,6 @@ change local version -rulebend3r
 change hostname
 whatever applies to your machine etc etc
 save as .config
-emerge -av sys-kernel/linux-firmware
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
