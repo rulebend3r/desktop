@@ -11,11 +11,11 @@ set 1 bios_grub on
 mkpart primary 3 515
 name 2 boot
 set 2 BOOT on
-mkpart primary 515 16900
+mkpart primary 515 4612
 name 3 swap
-mkpart primary 16900 91382
+mkpart primary 4612 70903
 name 4 root
-mkpart primary 91382 -1 (30 GB for Kali/BlackArch or whatever else you may like)
+mkpart primary 70903 -1 (for Kali/BlackArch if you choose to dual boot)
 name 5 kali
 print
 quit
