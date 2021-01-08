@@ -1,13 +1,13 @@
 #rulebend3r# Oh-My-Zsh
 ZSH=/home/rulebend3r/.oh-my-zsh
-ZSH_THEME="newpowerline"    #kardan agnoster af-magic bira clean gentoo terminalparty
+ZSH_THEME="rulebend3r"    #newpowerlinegreen newpowerlinemagenta rulebend3r
 
 #####################
 ###set consolefont###
 #####################
-if [ $TERM = "linux" ]; then
-    setfont ter-powerline-v12n
-fi
+#if [ $TERM = "linux" ]; then
+#    setfont ter-powerline-v12n
+#fi
 #####################
 
 #POWERLINE_RIGHT_A="date"
@@ -55,14 +55,18 @@ COMPLETION_WAITING_DOTS="true"
 #export NMON=cmknt
 export EDITOR="vim"
 export PAGER="less"
-export BROWSER="chromium"
+export BROWSER="brave-bin"
 export BROWSERCLI="links"
 export MOVPLAY="mpv"
-export PICVIEW="ristretto"
+export PICVIEW="sxiv"
 export SNDPLAY="mpv"
-export TERMINAL="urxvt"
-export PULSE_LATENCY_MSEC=60
+export TERMINAL="tilix"
+#export PULSE_LATENCY_MSEC=60
 export TERM="xterm-256color"
+export MPD_HOST="localhost"
+export MPD_PORT="6600"
+#export PATH=/home/rulebend3r/.cargo/bin/:$PATH
+export PATH=/home/rulebend3r/.local/bin/:$PATH
 
 # File Extensions
 for ext in html org php com net no;    do alias -s $ext=$BROWSER; done
@@ -82,30 +86,14 @@ alias Nvidia-Settings='optirun -b none nvidia-settings -c :8'
 alias SSD='sudo shutdown -P now'
 alias Suspend='sudo pm-suspend'
 alias Stat='uname -a;systemd-analyze time;wc -l /lib/modules/$(uname -r)/modules.order;lsinitcpio -a /boot/initramfs-linux.img'
-#alias laptop-mode='grep -r '^\(CONTROL\|ENABLE\)_' /etc/laptop-mode/conf.d'
 alias keys='xev'
-alias unblock-wireless='rfkill unblock all && ifconfig set wlan0 up'
-alias toggle-wifi='sudo ifconfig wlan0 down && sudo ifconfig wlan0 up'
-alias audit='lynis --auditor rulebend3r'
-alias Minimal='~/Scripts/minimal.sh'
 alias SR='sudo reboot'
 alias blank='setterm -blank 0'
 alias AM='alsamixer'
-alias AME='alsamixer -D equal'
-
-# Programming
-alias cdProg='cd ~/Dropbox/Programming'
-alias Prog='cd ~/Downloads/YouTube/Programming && ranger'
-alias run='ipython2'
-
-# Weather
-alias Weather='wego'
-alias Redding='wego 4 redding'
+alias GM='grub-mkconfig -o /boot/grub/grub.cfg'
 
 # Git
 alias cdG='cd /home/rulebend3r/Git/desktop'
-alias cdGP='cd /home/rulebend3r/Git-Packages'
-alias GitStatus='git status -u no'
 alias GA='git add'
 alias GC='git commit -m'
 alias Push='git push origin master'
@@ -114,32 +102,16 @@ alias Pull='git pull'
 # Configs
 alias Config='cd ~/.config'
 alias Background='~/.config/awesome/themes/rulebend3r/wall.jpg'
-
-# GPG
-alias Keys='gpg --recv-keys'
+alias eKT='vim ~/.config/kitty/kitty.conf'
+alias eST='sudo vim ~/st/config.h'
+alias eRG='vim ~/.config/ranger/rc.conf'
 
 # Fonts
 alias Fonts='fc-cache -vf ~/.fonts'
-alias font-check='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
-
-# Backupp
-alias Backup-local='sudo /home/rulebend3r/Scripts/laptop_backup_local.sh'
-
-# SSH
-alias Anarchia='ssh rulebend3r@192.168.1.9'
-alias Anarchia='ssh -X rulebend3r@192.168.1.9'
-alias L-get='echo "/path/to/host/file ~/path/to/destination" && scp rulebend3r@192.168.1.7:'
-
-## Stress test
-alias Stress='systester-cli -gausslg 64M -threads 4'
-
-## DEs
-alias Cinnamon='sudo /home/rulebend3r/Scripts/cinnamon.sh'
-alias Awesome='sudo /home/rulebend3r/Scripts/awesome.sh'
 
 ## Flash iso to usb drive
-alias DD='dd bs=4M if=/home/rulebend3r/Downloads/install-amd64-minimal-20191020T214501Z.iso of=/dev/sdd status=progress oflag=sync'
-alias wipefs='wipefs --all /dev/sdd'
+#alias DD='dd bs=4M if=/home/rulebend3r/Downloads/install-amd64-minimal-20191020T214501Z.iso of=/dev/sdd status=progress oflag=sync'
+#alias wipefs='wipefs --all /dev/sdd'
 
 ## Fun
 alias aq='asciiquarium -c'
@@ -147,30 +119,10 @@ alias aqg='asciiquarium-git'
 alias kitty='oneko'
 alias ai='ascii-invaders'
 alias PLC='phoon | lolcat'
+alias cowsay='fortune | cowsay | lolcat'
 
 ## Conky
 alias eC='vim ~/.config/awesome/conky/conkyrc'
-alias cdC='cd ~/.conky/HUD'
-alias HUD='~/Scripts/start_HUD.sh'
-alias SafeConky='~/Scripts/safe_conky.sh'
-alias DangerConky='~/Scripts/danger_conky.sh'
-
-## Bitcoin
-alias bc='btc'
-
-## Games
-alias cdX='cd ~/.local/share/feral-interactive/XCOM2/VFS/Local/my\ games/XCOM2/XComGame/Config/'
-alias cdX2='cd ~/.local/share/Steam/steamapps/common/XCOM\ 2/share/data/xcomgame'
-alias xcom2='cd ~/Dropbox/XCOM/Saves/XCOM2 && cp ~/.local/share/feral-interactive/XCOM2/VFS/Local/my\ games/XCOM2/XComGame/SaveData/* .'
-alias xcom='cd ~/Dropbox/XCOM/Saves/XCOMEW && cp ~/.local/share/feral-interactive/XCOM/XEW/savedata/* .'
-alias Steam='LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/lib32/opengl/nvidia/lib" steam'
-alias sudoku='nsudoku'
-alias tetris='bastet'
-alias mario='mupen64plus --windowed ~/ROMs/N64/SuperMario64.v64'
-alias kart='mupen64plus --windowed ~/ROMs/N64/MarioKart64.v64'
-alias zelda='mupen64plus --windowed ~/ROMs/N64/Zelda64.v64'
-alias zeldamajora='mupen64plus --windowed ~/ROMs/N64/ZeldaMajorasMask.z64'
-alias ps2='pcsx2'
 
 ## Packages
 alias extract='dtrx'
@@ -183,6 +135,7 @@ alias bz2='tar -jxvf'
 alias SE='sudo eselect'
 alias dep='emerge --ask --verbose --depclean'
 alias genlop='genlop -t'
+alias genlopremain='watch -cn 10 genlop -ci'
 alias OneShot='emerge --ask --verbose --oneshot portage'
 alias Rebuild='revdep-rebuild -v'
 alias Sync='time emerge --sync'
@@ -191,23 +144,26 @@ alias E='time emerge -av'
 alias EU='time emerge --ask --verbose --update --newuse --deep @world'
 alias EUB='time emerge --ask --verbose --newuse --update --deep --with-bdeps=y @world'
 alias SES='sudo eix-sync'
+alias SEU='sudo eix-update'
 alias cdE='cd /etc && sudo su'
 alias cdP='cd /etc/portage && sudo su'
-alias cdU='cd /etc/portage/package.use && sudo su'
-alias cdB='cd /etc/portage/package.mask && sudo su'
+alias cdu='cd /etc/portage/package.use && sudo su'
+alias cdM='cd /etc/portage/package.mask && sudo su'
+alias cdU='cd /etc/portage/package.unmask && sudo su'
 alias cdK='cd /etc/portage/package.accept_keywords && sudo su'
 alias eM='sudo vim /etc/portage/make.conf'
 alias EW='emerge-webrsync'
 alias eup='etc-update'
 alias eK='eclean-kernel'
-alias GK='genkernel --makeopts=-j9 --menuconfig all'
+alias GK='genkernel --makeopts=-j9 --microcode --menuconfig all'
+alias SEK='sudo eselect kernel list'
+alias LA='sudo layman -a'
+alias LD='sudo layman -d'
+alias LS='sudo layman -S'
 
 ## Portage
-alias FL='sudo tail -f /var/log/emerge-fetch.log'
-alias EL='sudo tail -f /var/log/emerge.log'
-
-## Manjaro
-alias Man-mirrors='sudo pacman-mirrors -g && sudo pacman -Syy'
+alias FL='tail -f /var/log/emerge-fetch.log'
+alias EL='tail -f /var/log/emerge.log'
 
 ## Arch
 alias YT='yaourt'
@@ -232,37 +188,18 @@ alias eRC='cd ~/.config/awesome && vim rc.lua'
 alias eW='cd ~/.config/awesome && vim wi.lua'
 alias eRT='cd ~/.config/awesome/themes/rulebend3r && vim theme.lua' 
 alias cdA='cd ~/.config/awesome'
-#alias cdD='cd ~/.config/awesome/PROFILES/Default'
-alias cdM='cd ~/.config/awesome/PROFILES/rulebend3r'
 alias cdT='cd ~/.config/awesome/themes/rulebend3r'
-alias BG='~/Scripts/background.sh'
-
-## Theming
-alias Rulebend3r='~/Scripts/Theming/rulebend3r.sh'
-alias Default='~/Scripts/Theming/default.sh'
-alias 1080='/home/rulebend3r/Scripts/Theming/1080.sh'
-alias 1440='/home/rulebend3r/Scripts/Theming/1440.sh'
-
-## suckless terminal
-alias eST='sudo vim /etc/portage/savedconfig/x11-terms/st-0.8.2'
 
 ## Tmux
 alias TM='tmux'
 alias eTM='vim ~/.tmux.conf'
 alias tkill='tmux kill-session'
 
-## Geeknote
-alias geek-new='~/Scripts/geeknote/geeknote-new-note.sh'
-
 ## Directories
-alias space='ncdu'
-alias space-color='cdu'
 alias ll='ls -l'
 alias la='ls -ltra'
 alias l='ls'
 alias C='clear'
-alias se='sudo vim'
-alias e='vim'
 alias home='cd ~'
 alias ..='cd ..'
 alias ...='cd ...'
@@ -275,16 +212,12 @@ alias del='trash-put'
 alias tr='trash-rm'
 alias lsTrash='ls ~/.local/share/Trash/files/'
 alias cdTrash='cd ~/.local/share/Trash/files/'
-alias lD='ls ~/Downloads'
+alias lsD='ls ~/Downloads'
 alias cdD='cd ~/Downloads'
+alias cdV='cd ~/Videos'
+alias cdc='cd ~/.config'
 alias RG='ranger'
-
-## YouTube
-alias cdYT='cd ~/Downloads/YouTube'
-alias yt='mpsyt'
-alias cleanYT='rm ~/Downloads/YouTube/*.*'
-#alias DL='~/Scripts/ytdl-helper.sh'
-#alias DL='cd ~/Downloads/YouTube && youtube-dl'
+alias cdGS='cd ~/Git/searx/'
 
 ## X Resources Stuff
 alias eX='vim ~/.Xresources'
@@ -293,113 +226,44 @@ alias XTD='xrdb -merge ~/st/.Xdefaults'
 
 ## Zsh Stuff
 alias eZ='vim ~/.zshrc'
-alias eOMZ='vim ~/.oh-my-zsh/themes/rulebend3r.zsh-theme'
+alias eOMZ='vim ~/.oh-my-zsh/themes/newpowerline.zsh-theme'
+alias cdO='cd ~/.oh-my-zsh'
+alias cdOT='cd ~/.oh-my-zsh/themes'
 alias z='source ~/.zshrc'
 
 ## Vim Stuff
 alias eV='vim ~/.vimrc'
 alias e='vim'
-
-## Rip CDs
-alias CDinfo='cdparanoia -vsQ'
-alias rip='cdparanoia -B'
-alias mp3='for t in track{01-14}*.wav; do lame -b 320 $t; done'
+alias se='sudo vim'
 
 ## Scripts
 alias cdS='cd ~/Scripts'
-alias colordump='~/Scripts/colordump.sh'
-alias activate='chmod 755'
-alias top100='/home/rulebend3r/Scripts/top100.sh'
-alias time_international='/home/rulebend3r/Scripts/time_international.sh'
-alias natgeo='/home/rulebend3r/Scripts/natgeo.sh'
-alias ballz='python /home/rulebend3r/Scripts/Games/Ballz.py'
-alias tpbs='clear && figlet -c TPB Search && ~/Scripts/tpb.sh'
-alias convertMTS='~/Scripts/convertMTS.sh'
-alias convertOGV='mencoder out.ogv -ovc lavc -oac mp3lame -o screencast.avi'
-
-alias compressMKV='ffmpeg -i input.mkv -c:v libx264 $1'
-
-## Transmission
-alias IP-update='~/Scripts/blocklist.sh'
-alias tsm-check='qutebrowser http://localhost:9091/transmission/web'
-alias t='transmission-daemon && transmission-remote-cli'
-alias kT='killall transmission-daemon'
 
 ## News and Music
+alias eVIS='vim /home/rulebend3r/.config/vis/config'
+alias CML='cmus-lyrics'
+alias CM='cmus'
+alias eMPD='sudo vim /etc/mpd.conf'
 alias MPD='ncmpcpp'
 alias MO='mocp -T transparent-background'
-alias news='newsbeuter'
-alias Xcom='cortex xcom2'
-alias War='cortex warriors game'
-alias nix='cortex linux'
-alias pods='podbeuter'
-alias twit='turses'
-alias Pods='cd ~/Podcasts && ranger'
-alias music='sh ~/Scripts/music.sh & '
 
 ## Multimedia
 alias irc='weechat'
-alias M='mpv'
-alias Vids='cd ~/Downloads/.blackbox && ranger'
-
-## Google Calenar
-alias gcal-week='gcalcli --width 12 calw'
-alias gcal='gcalcli --width 12 calm'
-alias gcal-add='gcalcli quick'
-alias gcal-agenda='gcalcli agenda'
-
-## Peer Guardian
-alias pgl-update='pglcmd update'
-alias pgl-start='pglcmd restart'
-alias pgl-status='pglcmd status'
-alias pgl-dump='pglcmd stats'
-alias pgl-test='pglcmd test'
-alias pgl-stop='pglcmd stop'
-
-## w3m
-alias web='cd ~/Podcasts && w3m -cookie www.google.com'
-
-## Check Screencast
-alias FF-check-raw='mpv ~/Screencasts/screencast.mkv'
-alias FF-check-final='mpv ~/Screencasts/screencast.mp4'
-# Bottom Left
-#alias FF-cam='mplayer -cache 128 -tv driver=v4l2:width=700:height=393 -vo xv tv:// -noborder -geometry "2%:95%" -ontop'
-# Top Right
-#alias FF-cam='mplayer -cache 128 -tv driver=v4l2:width=623:height=350 -vo xv tv:// -noborder -geometry "98%:5%" -ontop'
-# Bottom Right
-#alias FF-cam='mplayer -cache 128 -tv driver=v4l2:width=467:height=262 -vo xv tv:// -noborder -geometry "99%:96%" -ontop'
-alias FF-cam='mplayer -cache 256 -tv driver=v4l2:width=320:height=240 -vo xv tv:// -noborder -geometry "100%:60%" -ontop'
-
+#alias M='mpv'
 
 ## Net
-alias NM='sudo /etc/init.d/NetworkManager restart'
+alias NMC='nmcli device wifi connect RuleBend3r5 password DewPoint4070'
+alias NML='nmcli device wifi list'
 alias WW='wicd-curses'
-alias hogs='sudo nethogs tun0'
-alias net-driftnet='echo "see pics from other computers on network" && sudo driftnet -i eno1'
-alias net-ettercap='echo "set up interface to capture network data" && sudo ettercap -TQM arp -i eno1//'
-alias net-urlsnarf='echo "see which websites others on network are visiting" && sudo urlsnarf -i eno1|cut -d\" -f4'
-alias net-scan='sudo arp-scan -l -I eno1'
-alias net-stat='netstat -t -v -c -ee'
-alias net-traf='sudo iptraf-ng'
-alias net-bmon='bmon'
-alias net-nmap='nmap -v -sn 191.168.1.0/24'
-alias net-fping='fping -c1 -gds 192.168.1.0/24 2>&1| egrep -v "ICMP|xmt"'
-alias net-dump='sudo tcpdump -i eno1'
-alias net-wifi='wavemon'
-alias net-nmon='nmon'
-alias net-speedtest='speedtest-cli'
-alias net-graph='speedometer -r eno1-t eno1'
-alias NG='nbwmon -i enp3s0'
-alias iftop='sudo iftop -p -n'
-alias slurm='slurm -i eno1'
+alias NGE='nbwmon -i enp3s0'
+alias NGW='nbwmon -i wlp2s0'
 alias ping='ping -c 3 8.8.8.8'
+alias SRX='python /usr/lib64/python3.6/site-packages/searx/webapp.py'
 
-## Power
-alias bat='acpi'
-alias bat-all='acpi -V'
-alias Power='sudo powertop'
-
-## Misc
+##Misc
+alias calc='galculator'
+alias SGP='sudo gparted'
+alias SPC='sudo pcmanfm'
 alias ST='sudo thunar'
 alias x='exit'
 alias xset='xsetroot -cursor_name left_ptr'
@@ -410,30 +274,7 @@ alias GT='gotop'
 alias SS='sudo su'
 alias um='unimatrix -a -f -l k -s 90'
 alias cm='cmatrix'
-alias blanking='~/Scripts/blanking.sh'
-alias biguns='~/Scripts/biguns.sh'
-alias flux='xflux -z 94596'
-alias Redshift='sudo redshift -l 37.9:122.1'
-alias X='xscreensaver &'
-alias kX='killall xscreensaver'
-alias kG='killall gnome-screensaver'
-alias kF='pkill xflux'
-alias pic='tiv'
-alias clock='tty-clock -c -C 4'
-alias clock-graph='clockywock'
-alias date-time='watch -n 1 -t date'
-alias stopwatch='echo "cntl-z to end" & time cat'
 alias sw='telnet towel.blinkenlights.nl'
-alias info='inxi -F'
-alias Cap='cd ~/Screencasts/Screencaps/ && scrot'
-alias rip='abcde'
-alias vidterm='mplayer -vo caca'
-alias IRC='irssi -c chat.freenode.net'
-#alias graph='gnuplot'
-
-## Sparklines - CLI visualizations
-alias spark-earthquake='curl http://earthquake.usgs.gov/earthquakes/catalogs/eqs1day-M1.txt --silent | sed '1d' | cut -d, -f9 | sparklines'
-alias spark-wifi='~/Scripts/wifi.sh'
 
 ###########################################################
 ########################### ZSH ###########################
@@ -477,81 +318,6 @@ bindkey -M vicmd '^s' history-incremental-search-backward
 
 # Awesome Logout
 Logout() { echo 'awesome.restart()' | awesome-client ;}
-
-# Christmas Tree
-Christmas() { perl -MAcme::POE::Tree -e 'Acme::POE::Tree->new()->run()' ;}
-
-# Best of YouTube
-bestofyoutube() { cd ~/Downloads/YouTube && ~/Scripts/bestofyoutube.sh  }
-
-# Simple python HTTP server
-server() { python3 -m http.server ;}
-
-# Hacker top
-hacker-top() { python ~/Scripts/hacker-top/hacker_top.py  ;}
-
-# Reddit top
-reddit-top() { python ~/git/reddit-top/reddit_top ;}
-
-# Transmission
-T() { ~/Scripts/blocklist.sh && transmission-daemon && transmission-remote-cli ;}
-
-# Pirate Bay search
-tpb() { clear && figlet -c Pirate Bay && ~/Scripts/tpb.sh ;}
-
-# Torrentz.eu search
-torrentzeu() { clear && figlet -c Torrentz EU && ~/Scripts/torrentzeu.sh ;}
-
-# YouTube Viewer
-yt-viewer() { clear && figlet -c YouTube Viewer && youtube-viewer ;}
-
-# No video / music only
-
-yt-listen() { clear && figlet -c YouTube Listen && youtube-viewer -n $@ ;}
-
-# Pianobar - ncurses Pandora Radio client
-pandora-cli() { clear && figlet -c Pandora CLI && ~/.config/pianobar/pianobar_headless.sh ;}
-
-# PMS- ncurses Spotify client
-#spotify-cli() { clear && cd ~/Music && figlet -c Spotify CLI && python3 ~/Scripts/mps/mps;}
-spotify-cli() { clear && python3 ~/Scripts/mps/mps;}
-
-# Grooveshark CLI
-groove-dl-cli() { cd grooveshark && clear && figlet -c Grooveshark && groove-dl ;}
-
-## Vim help page
-:h()  { vim +":h $1" +'wincmd o' +'nnoremap q :q!<CR>' ;}
-
-## Command-line calculator
-calc() { python -ic "from __future__ import division; from math import *; from random import *" ;}
-
-## Commandline Fu
-cmdfu() { curl "http://www.commandlinefu.com/commands/matching/$(echo "$@" \
-	| sed 's/ /-/g')/$(echo -n $@ | base64)/plaintext" ;}
-
-##Check if websites are down
-down4me() { curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g';}
-
-###########################################################
-###################### TRANSMISSION ####################### 
-###########################################################
-
-tsm-clearcompleted() {
-        transmission-remote -l | grep 100% | grep Done | \
-        awk '{print $1}' | xargs -n 1 -I % transmission-remote -t % -r ;}
-tsm() { transmission-remote --list ;}
-tsm-start() { transmission-daemon ;}
-tsm-stop() { pkill tramsmission-daemon ;}
-tsm-altspeedenable() { transmission-remote --alt-speed ;}
-tsm-altspeeddisable() {	transmission-remote --no-alt-speed ;}
-tsm-add() { transmission-remote --add "$1" ;}
-tsm-askmorepeers() { transmission-remote -t"$1" --reannounce ;}
-tsm-pause() { transmission-remote -t"$1" --stop ;}
-tsm-start-torrent() { transmission-remote -t"$1" --start ;}
-tsm-purge() { transmission-remote -t"$1" --remove-and-delete ;} # will delete data also
-tsm-remove() { transmission-remote -t"$1" --remove ;} # does not delete data
-tsm-info() { transmission-remote -t"$1" --info ;}
-#tsm-speed() { while true;do clear; transmission-remote -t"$1" -i | grep Speed;sleep 1;done ;}
 
 ###########################################################
 ######################### FFMPEG ########################## 
@@ -662,145 +428,9 @@ my-ip() {
     echo "---------------------------------------------------"
 }
 
-## Google Translate Functions ##
-say() { 
-
-	mplayer -user-agent Mozilla \
-	"http://translate.google.com/translate_tts?ie=UTF-8&tl="$1"&q=$(echo "$@" \
-	| cut -d ' ' -f2- | sed 's/ /\+/g')" > /dev/null 2>&1 ;}
-
-say-translation() { 
-
-	lang=$1
-	trans=$(translate {=$lang} "$(echo "$@" | cut -d ' ' -f2- | sed 's/ /\+/g')" )	
-	echo $trans
-	mplayer -user-agent Mozilla \
-	"http://translate.google.com/translate_tts?ie=UTF-8&tl=$lang&q=$trans" > /dev/null 2>&1 ;}
-
-##############################################################
-########################## PODCASTS ########################## 
-##############################################################
-
-nvlc-podcast() { nvlc --no-color -S podcast --podcast-urls "$@" ;}
-pods-LinuxActionShow() { nvlc-podcast "http://feeds.feedburner.com/computeractionshowvideo" ;}
-pods-Unfiltered() { nvlc-podcast "http://www.jupiterbroadcasting.com/feeds/unfilterHD.xml" ;}
-pods-Scibyte() { nvlc-podcast "http://feeds.feedburner.com/scibytelarge " ;}
-pods-RonPaul() { nvlc-podcast "https://www.google.com/url?q=http://www.ronpaul2012podcast.com/feed/&sa=U&ei=h8NIUbzfJoXJiQL4uoCoDw&ved=0CDYQFjAI&sig2=N2y3rxIlKxYDRI-Z9U8yRw&usg=AFQjCNGmGih9EAkV2JfSw2Nj64V90Jk5qg" ;}
-pods-StefanMolyneux() { nvlc-podcast "http://feeds.feedburner.com/FreedomainRadioVolume6" ;}
-pods-JoeRoganExperience() { nvlc-podcast "htthttp://joeroganexp.joerogan.libsynpro.com/irssp://joeroganexp.joerogan.libsynpro.com/irss" ;}
-pods-FreedomFeens() { nvlc-podcast "http://www.freedomfeens.com/feed/" ;}
-pods-GoldMoneyVideos() { nvlc-podcast "http://feeds.feedburner.com/GoldmoneyRssFeedGoldVideos" ;}
-pods-GoldMoneyPodcasts() { nvlc-podcast "http://feeds.feedburner.com/GoldmoneyFoundationPodcasts" ;}
-#pod-() { nvlc-podcast "" ;}
-
-##############################################################
-######################## LIVE STREAMS ######################## 
-##############################################################
-
-TV-m() { livestreamer -p mplayer "$1" best ;}
-TV-v() { livestreamer -p vlc "$1" best ;}
-
-Jupiter() { livestreamer -p mpv http://www.ustream.tv/channel/jupiterbroadcasting best ;}
-
-TwitchyMarbs() { livestreamer -p mpv http://www.twitch.tv/Marbozir best ;}
-TwitchyBeagle() { livestreamer -p mpv http://www.twitch.tv/beagsandjam best ;}
-TwitchyQuill() { livestreamer -p mpv http://www.twitch.tv/quill18 best ;}
-TwitchyElysium() { livestreamer -p mpv http://www.twitch.tv/enterelysium best ;}
-
-# News
-live-news-cnn() { livestreamer -p mplayer http://www.justin.tv/msnbc_live_stream_cnn#/w/5008673600 live ;}
-live-news-cnn_international() { livestreamer -p mplayer http://www.justin.tv/rentadrone_cnbc#/w/5011049360/22 live ;}
-live-news-cbs() { livestreamer -p mplayer http://www.ustream.tv/cbsnews live ;}
-live-news-fox() { livestreamer -p mplayer http://www.justin.tv/newswatch_2#/w/5013818384/5 live ;}
-live-news-prisonplanet() { livestreamer -p mplayer http://www.ustream.tv/channel/alex-jones---infowars-com---prisonplanet-tv live ;}
-live-news-KRON_San_Francisco() { livestreamer -p mplayer http://www.ustream.tv/kron4news best ;}
-live-news-The_FED() { livestreamer -p mplayer http://www.ustream.tv/federalreserve live ;}  
- 
-# Series
-live-series-simpsons() { livestreamer -p mplayer http://www.justin.tv/arconai_244#/w/5013781232/19  live ;}
-live-series-southpark() { livestreamer -p mplayer http://www.justin.tv/arconai_229#/w/5622202400/179  best ;}
-live-series-survival() { livestreamer -p mplayer http://www.justin.tv/survivor101#/w/5531579536/12 best ;}
-live-series-criminal_minds() { livestreamer -p mplayer http://www.justin.tv/lurking_in_the_dark17 live ;}
-live-series-mythbusters() { livestreamer -p mplayer  best ;}
-live-series-married_with_children() { livestreamer -p mplayer http://www.justin.tv/mwconjtv#/w/4992184096/88 live ;}
-live-series-stargate_SG1() { livestreamer -p mplayer http://www.justin.tv/oldngr8#/w/5006964064/9 live ;}
-live-series-that_70s_show() { livestreamer -p mplayer http://www.justin.tv/highspothorror128#/w/4994695216/102 live ;}
- 
-# Science
-live-science-the_universe() { livestreamer -p mplayer http://www.justin.tv/the_lost_continent#/w/5005014000/48 live ;}
- 
-# Movies
- 
-#live-movies-horror-2000_2013_HQ() { livestreamer -p mplayer http://www.justin.tv/horrorhq0010#/w/5074870864/20 live ;}
-live-movies-horror4life() { livestreamer -p mplayer http://www.justin.tv/finn_horrorstfu51 live ;}
-#live-movies-horror-2() { livestreamer -p mplayer http://www.justin.tv/jags__movies04#/w/5008275648/4 live ;}
- 
-live-movies-new_releases-2010_2013() { livestreamer -p mplayer http://www.justin.tv/videoisnothere6 live ;}
-#live-movies-new_releases-2012_2013_HQ() { livestreamer -p mplayer http://www.justin.tv/movies_tv68#/w/5056426000/115 live ;}
-live-movies-movies_2010_2013() { livestreamer -p mplayer http://www.justin.tv/gewinnen_duh_bringen live ;}
- 
-live-movies-general() { livestreamer -p mplayer http://www.justin.tv/420nomad554 live ;}
-#live-movies-general-movies_n_that() { livestreamer -p mplayer http://www.justin.tv/walterkronic#/w/5013245536/8 live ;}
- 
-
-
-## Capture video streams
- 
-sniff-begin() { sudo iptables -t nat -A OUTPUT -p tcp --dport 1935 -m owner \! --uid-owner root -j REDIRECT ;}
-sniff-capture-rtmpsrv() { rtmpsrv ;}
-sniff-end() { sudo iptables -t nat -D OUTPUT -p tcp --dport 1935 -m owner \! --uid-owner root -j REDIRECT ;}
-
-## Rtmpsrv Feeds (may need to add -v before -r)
-
-# Jupiter Broadcasting
-live-JupiterBroadcasting() { vlc rtsp://videocdn-us.geocdn.scaleengine.net/jblive/live/jblive.stream }
-
-
-# Russia Today US
-iptv-RT_US() { rtmpdump \
-		-r "rtmp://rt.fms-04.visionip.tv/live" \
-		-a "live" \
-		-f "LNX 11,2,202,270" \
-		-W "http://rt.com/s/swf/player5.4.viral.swf" \
-		-p "http://rt.com" -y "RT_US_2" \
-		| mplayer - ;}
-
-# Bloomberg
-iptv-Bloomberg() { rtmpdump \
-		-v \
-		-r rtmp://cp116697.live.edgefcs.net:80/live/BnazlkNDpCIcD-QkfyZCQKlRiiFnVa5I_640_360_440@18679  \
-		-W http://player.ooyala.com/cacheable/c78f866930724ffedfe8cf5349712569/player_v2.swf \
-		-p http://tvpc.com \
-		| mplayer - ;}
-
-# MSNBC
-iptv-MSNBC() { rtmpdump \
-		-v \
-		-r "rtmp://a.cdn.msnbclive.eu/edge" \
-		-y "msnbc_live" \
-		-W "http://msnbclive.eu/getswf.php?name=player.swf" \
-		-p "http://www.rentadrone.tv/msnbc-live-rockinroosters/" \
-		| mplayer - ;}
-
-# Rueters
-iptv-Rueters() {  rtmpdump \
-		-r "rtmp://media9.lsops.net/reuters/" \
-		-a "reuters/" -W "http://reuters.cdn.livestation.com/flash/player/5.7/player.swf" \
-		-p "http://reuters.livestation.com/demo" \
-		--live \
-		-y "reuters_rlsweba_en_veryhigh.sdp" \
-		| mplayer -;}
-
 ##########################################################
 ########################## MODS ########################## 
 ##########################################################
-
-
-#PATH="/home/rulebend3r/perl5/bin${PATH:+:${PATH}}"; export PATH;
-#PERL5LIB="/home/rulebend3r/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-#PERL_LOCAL_LIB_ROOT="/home/rulebend3r/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-#PERL_MB_OPT="--install_base \"/home/rulebend3r/perl5\""; export PERL_MB_OPT;
-#PERL_MM_OPT="INSTALL_BASE=/home/rulebend3r/perl5"; export PERL_MM_OPT;
 
 plugins=(git vi-mode themes) #archlinux zsh-completions color-command#
 ZSH_DISABLE_COMPFIX='true'
@@ -814,11 +444,13 @@ clear
 #/home/rulebend3r/Scripts/batman.sh
 #/home/rulebend3r/Scripts/invaders1.sh
 screenfetch -E
+#screenfetch
 #phoon | lolcat
 #al-info
+eval $(thefuck --alias)
 
 #Gentoo#
-source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr//share/zsh/site-functions/zsh-syntax-highlighting.zsh
 
 #Arch#
 #source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -828,7 +460,4 @@ source /usr/share/zsh/site-contrib/zsh-syntax-highlighting/zsh-syntax-highlighti
 
 #Linux From Scratch#
 #source /home/rulebend3r/Git-Packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-eval $(thefuck --alias)
-
 
