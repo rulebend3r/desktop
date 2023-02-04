@@ -11,32 +11,24 @@ set 1 bios_grub on
 mkpart primary 3 515
 name 2 boot
 set 2 BOOT on
-mkpart primary 515 4612
+mkpart primary 515 8708
 name 3 swap
-mkpart primary 4612 70903
+mkpart primary 8708 70148
 name 4 root
-mkpart primary 70903 -1 (for Kali/BlackArch if you choose to dual boot)
-name 5 kali
+mkpart primary 70148 -1
+name 5 home
 print
 quit
-parted -a optimal /dev/sdb
-unit mib
-mkpart primary 1 476936
-name 1 home
-print
-quit
-mkfs.vfat -n "GRUB" /dev/sda1 *this step is optional*
-mkfs.ext2 -L "boot" /dev/sda2
+mkfs.fat -F32 -n "boot" /dev/sda2
 mkswap -L "swap" /dev/sda3
 swapon /dev/sda3
 mkfs.ext4 -L "root" /dev/sda4
-mkfs.ext4 -L "kali" /dev/sda5
-mkfs.ext4 -L "home" /dev/sdb1
+mkfs.ext4 -L "home" /dev/sda5
 mount /dev/sda4 /mnt/gentoo
 mkdir /mnt/gentoo/boot
 mount /dev/sda2 /mnt/gentoo/boot
 mkdir /mnt/gentoo/home
-mount /dev/sdb1 /mnt/gentoo/home
+mount /dev/sda5 /mnt/gentoo/home
 date MMDDhhmmYYYY
 cd /mnt/gentoo
 links https://www.gentoo.org/downloads
@@ -65,9 +57,9 @@ USE="X threads gstreamer upower dbus jpeg png svg lock session startup-notificat
 
 #source /var/lib/layman/make.conf
 
-MAKE_OPTS="-j9"
+MAKE_OPTS="-j13"
 
-VIDEO_CARDS="intel i915 i965 fbdev"
+VIDEO_CARDS="intel fbdev"
 ALSA_CARDS="snd_hda_intel"
 INPUT_DEVICES="evdev keyboard mouse synaptics"
 
@@ -92,6 +84,8 @@ mount --rbind /sys /mnt/gentoo/sys
 mount --make-rslave /mnt/gentoo/sys
 mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
+mount --bind /run /mnt/gentoo/run
+mount --make-slave /mnt/gentoo/run
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
@@ -100,7 +94,7 @@ emerge --sync
 eselect news list
 eselect news read
 eselect profile list
-eselect profile set 16 (or which ever you prefer)
+eselect profile set 9 (or which ever you prefer)
 emerge -uvDNa --with-bdeps=y @world
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
@@ -146,14 +140,14 @@ add the following:
 #       documentation for details on setting a label. To obtain the UUID, use
 #       the blkid(8) command.
 
-/dev/sda2		/boot		    ext2		noauto,noatime	1 2
+/dev/sda2		/boot		    vfat		noauto,noatime	1 2
 /dev/sda4		/		        ext4		noatime		0 1
 /dev/sda3		none		    swap		sw		0 0
-/dev/sdb1		/home		    ext4		noatime		0 2
+/dev/sda5		/home		    ext4		noatime		0 2
 /dev/cdrom	/mnt/cdrom	auto		noauto,ro	0 0
 save
 cat /etc/fstab (to check)
-genkernel --makeopts=-j9 --menuconfig all
+genkernel --makeopts=-j13 --menuconfig all
 activate the following modules:
 alsa pulseaudio lm_sensors xorg wifi anything intel
 usb2, 3, mass storage
@@ -189,6 +183,7 @@ emerge -av syslog-ng cronie mlocate logrotate
 rc-update add syslog-ng default
 rc-update add cronie default
 rc-update add sshd default
+rc-update add elogind default
 emerge --av dhcpcd iproute2 net-tools wireless-tools iw gentoolkit
 emerge -av sys-boot/grub:2 os-prober
 grub-install /dev/sda
@@ -218,7 +213,7 @@ save
 reboot
 login as user
 sudo su
-emerge -av xorg-x11 xorg-drivers xorg-server twm xterm xclock
+emerge -av xorg-apps xorg-fonts xorg-drivers xorg-server twm xterm xclock
 emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins alsa-mixer pulseaudio pavucontrol
 euse -E alsa (if alsa is not flagged globally in make.conf)
 /etc/init.d/alsasound start
@@ -226,7 +221,6 @@ alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
 rc-update add alsasound boot
 rc-update add udev default
-rc-update add consolekit default
 cd /etc/portage/
 mkdir package.unmask package.keywords package.license
 cd package.keywords
