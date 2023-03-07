@@ -11,8 +11,9 @@ xset s noblank
 xset s noexpose
 xset s off -dpms
 
+run "blueman-applet"
 run "nm-applet"
-run "compton"
+run "picom"
 run "yakuake"
 #run "python3.6 /home/rulebend3r/.local/share/searx/searx/webapp.py"
 #run "pidgin"

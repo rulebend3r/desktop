@@ -1,0 +1,156 @@
+##RuleBend3r Conky##
+
+update_interval 1
+total_run_times 0
+net_avg_samples 1
+cpu_avg_samples 2
+imlib_cache_size 0
+double_buffer yes
+no_buffers yes
+format_human_readable
+use_xft yes
+xftfont xos4 Terminess Powerline:size=8
+override_utf8_locale no
+text_buffer_size 2048
+own_window_hints undecorated,below,skip_taskbar,skip_pager,sticky
+#own_window_hints undecorated,above,skip_taskbar,skip_pager,sticky
+draw_shades false
+own_window_transparent yes
+own_window yes
+#own_window_type desktop
+own_window_type override
+
+own_window_colour 000000
+own_window_argb_visual yes
+own_window_argb_value 0
+
+alignment top_right
+gap_y 25
+gap_x 5
+border_inner_margin 2
+draw_outline no
+draw_borders no
+own_window_class Conky
+#draw_graph_borders no
+
+maximum_width 360
+minimum_height 2500
+
+#default_graph_width=700
+#default_graph_height=33
+#default_bar_width=700
+#default_bar_height=12
+#default_bar_size 79 12
+#default_graph_size 79 33 
+
+TEXT
+${color #5b6dad}$nodename    ${alignc}$sysname $kernel ${alignr}${time %l:%M %p}
+${color #5b6dad}$hr
+${color #5b6dad}System: Gentoo Linux 5.4.83-gentoo-rulebend3r
+${color #5b6dad} Uptime:${color #7f8ed3} $uptime ${color #5b6dad}- Load:${color #7f8ed3} $loadavg
+${color #5b6dad} CPU Frequency:${color #7f8ed3} ${freq_g} Ghz ${color #5b6dad} Maximum:${color #7f8ed3} 4.00 Ghz
+${color #5b6dad} CPU Usage:${color #7f8ed3} $cpu% ${cpubar}
+${color #5b6dad}$hr
+${color #5b6dad}Core 1${alignr}Core 3
+${color #5b6dad}${cpugraph cpu1 40,178 000000 7f8ed3} ${alignr}${cpugraph cpu3 40,178 000000 7f8ed3}$color
+${color #5b6dad}Core 2${alignr}Core 4
+${color #5b6dad}${cpugraph cpu2 40,178 000000 7f8ed3} ${alignr}${cpugraph cpu4 40,178 000000 7f8ed3}$color
+#${color #5b6dad}Core 3${alignr}Core 7
+#${color #5b6dad}${cpugraph cpu3 20,178 000000 7f8ed3} ${alignr}${cpugraph cpu7 20,178 000000 7f8ed3}$color
+#${color #5b6dad}Core 4${alignr}Core 8
+#${color #5b6dad}${cpugraph cpu4 20,178 000000 7f8ed3} ${alignr}${cpugraph cpu8 20,178 000000 7f8ed3}$color
+${color #5b6dad}$hr
+${color #5b6dad} RAM Usage:${color #7f8ed3} $mem/$memmax - $memperc% ${membar}
+${color #5b6dad} Swap Usage:${color #7f8ed3} $swap/$swapmax - $swapperc% ${swapbar}
+${color #5b6dad} Processes:${color #7f8ed3} $processes  ${color #5b6dad}Running:${color #7f8ed3} $running_processes
+${color #5b6dad} Entropy: ${color #7f8ed3}${entropy_avail}${color #7f8ed3}/${color #7f8ed3}${entropy_poolsize} ${color #7f8ed3}${entropy_bar}
+${color #5b6dad}$hr
+${color #5b6dad}File Systems:
+${color #5b6dad} Root ${color #7f8ed3}${fs_used /}/${fs_size /} ${color #7f8ed3}${fs_bar /}
+${color #5b6dad} Home ${color #7f8ed3}${fs_used /home/rulebend3r/}/${fs_size /home/rulebend3r/} ${color #7f8ed3}${fs_bar /home/rulebend3r/}
+#${color #5b6dad}Music ${color #7f8ed3}${fs_used /home/rulebend3r/Music}/${fs_size /home/rulebend3r/Music} ${color #7f8ed3}${fs_bar /home/rulebend3r/Music}
+${color #5b6dad}$hr
+${color #5b6dad}Disk:
+ ${color #5b6dad}Read: ${color #7f8ed3} ${diskio_read /dev/sda6}		${alignr}${color #5b6dad}Write: ${color #7f8ed3} ${diskio_write /dev/sda6}	
+${color #5b6dad}${diskiograph_read /dev/sda6 40,178 07CC0D FF0000 -t}${color #5b6dad} ${alignr}${diskiograph_write /dev/sda6 40,178 07CC0D FF0000 -t}
+${color #5b6dad}$hr
+${color #5b6dad}Monitors:                   CPU TEMPS
+${color 7f8ed3}${exec sensors | grep Core\  | awk '{print $0}'}
+${color #5b6dad}$hr
+${color #5b6dad}Networking:
+ ${color #5b6dad}Down:${color #7f8ed3} ${downspeed enp3s0f0} k/s${color #5b6dad}${offset 80}Up:${color #7f8ed3} ${upspeed enp3s0f0} k/s
+${color #5b6dad}${downspeedgraph enp3s0f0 40,178 000000 7f8ed3} ${color #5b6dad}${upspeedgraph enp3s0f0 40,178 000000 7f8ed3}
+ ${color #5b6dad}Address: ${color #7f8ed3}${addr enp3s0f0}${alignr}${color #5b6dad}TCP Connections: ${color #7f8ed3}${tcp_portmon 1 65535 count}
+${color #5b6dad}$hr
+${color #5b6dad}Port(s)${alignr}#Connections
+${color #5b6dad}Inbound: ${tcp_portmon 1 32767 count}  Outbound: ${tcp_portmon 32768 61000 count}${alignr} ALL: ${tcp_portmon 1 65535 count}
+  ${color #5b6dad}Inbound Connection ${alignr} Local Service/Port$color
+  ${color #7f8ed3}${tcp_portmon 1 32767 rhost 0} ${alignr} ${tcp_portmon 1 32767 lservice 0}
+  ${color #7f8ed3}${tcp_portmon 1 32767 rhost 1} ${alignr} ${tcp_portmon 1 32767 lservice 1}
+  ${color #7f8ed3}${tcp_portmon 1 32767 rhost 2} ${alignr} ${tcp_portmon 1 32767 lservice 2}
+  ${color #7f8ed3}${tcp_portmon 1 32767 rhost 3} ${alignr} ${tcp_portmon 1 32767 lservice 3}
+ 
+ ${color #5b6dad}Outbound Connection ${alignr} Remote Service/Port$color
+  ${color #7f8ed3}${tcp_portmon 32768 61000 rhost 0} ${alignr} ${tcp_portmon 32768 61000 rservice 0}
+  ${color #7f8ed3}${tcp_portmon 32768 61000 rhost 1} ${alignr} ${tcp_portmon 32768 61000 rservice 1}
+  ${color #7f8ed3}${tcp_portmon 32768 61000 rhost 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
+  ${color #7f8ed3}${tcp_portmon 32768 61000 rhost 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
+${color #5b6dad}$hr
+${color #5b6dad}Top Processes:
+ ${color #5b6dad}Name                PID    CPU%   MEM%   TIME    USER
+ ${color #7f8ed3}${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1} ${top time 1} ${top user 1}
+ ${color #7f8ed3}${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2} ${top time 2} ${top user 2}
+ ${color #7f8ed3}${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3} ${top time 3} ${top user 3}
+ ${color #7f8ed3}${top name 4} ${top pid 4} ${top cpu 4} ${top mem 4} ${top time 4} ${top user 4}
+ ${color #7f8ed3}${top name 5} ${top pid 5} ${top cpu 5} ${top mem 5} ${top time 5} ${top user 5}
+${color #5b6dad}$hr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+${color #5b6dad}$hr
+
+${color #5b6dad}${alignc}RuleBend3r Music
+${color #7f8ed3}${alignc}$cmus_artist
+${color #7f8ed3}${alignc}$cmus_album
+${color #7f8ed3}${alignc}$cmus_title
+${color #5b6dad}$cmus_progress 
+${color #7f8ed3}${alignc}$cmus_curtime / $cmus_totaltime
+${color #5b6dad}${alignc}$cmus_state
+
+${color #5b6dad}$hr
+
+${image /home/rulebend3r/.config/awesome/conky/gentoologo.png -p 32,915 -s 300x300}
+${image /home/rulebend3r/.config/awesome/conky/gentoologo.png -p 44,0 -s 15x15}
