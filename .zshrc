@@ -79,13 +79,9 @@ for ext in wav mp3 ogg;            do alias -s $ext=$SNDPLAY; done
 ######################## ALIASES ####################### 
 ########################################################
 
-# Nvidia
-alias Nvidia-Settings='optirun -b none nvidia-settings -c :8'
-
 ## System
-alias SSD='sudo shutdown -P now'
+alias SSD='sudo shutdown -h now'
 alias Suspend='sudo pm-suspend'
-alias Stat='uname -a;systemd-analyze time;wc -l /lib/modules/$(uname -r)/modules.order;lsinitcpio -a /boot/initramfs-linux.img'
 alias keys='xev'
 alias SR='sudo reboot'
 alias blank='setterm -blank 0'
@@ -110,12 +106,11 @@ alias eRG='vim ~/.config/ranger/rc.conf'
 alias Fonts='fc-cache -vf ~/.fonts'
 
 ## Flash iso to usb drive
-#alias DD='dd bs=4M if=/home/rulebend3r/Downloads/install-amd64-minimal-20191020T214501Z.iso of=/dev/sdd status=progress oflag=sync'
+
 #alias wipefs='wipefs --all /dev/sdd'
 
 ## Fun
 alias aq='asciiquarium -c'
-alias aqg='asciiquarium-git'
 alias kitty='oneko'
 alias ai='ascii-invaders'
 alias PLC='phoon | lolcat'
@@ -132,9 +127,9 @@ alias bz='tar -xvjf'
 alias bz2='tar -jxvf'
 
 ## Gentoo
-alias SE='sudo eselect'
-alias dep='emerge --ask --verbose --depclean'
-alias genlop='genlop -t'
+alias ses='sudo eselect'
+alias dep='sudo emerge --ask --verbose --depclean'
+alias GL='genlop -t'
 alias genlopremain='watch -cn 10 genlop -ci'
 alias OneShot='emerge --ask --verbose --oneshot portage'
 alias Rebuild='revdep-rebuild -v'
@@ -162,7 +157,7 @@ alias LD='sudo layman -d'
 alias LS='sudo layman -S'
 
 ## Portage
-alias FL='tail -f /var/log/emerge-fetch.log'
+alias EFL='tail -f /var/log/emerge-fetch.log'
 alias EL='tail -f /var/log/emerge.log'
 
 ## Arch
@@ -189,6 +184,7 @@ alias eW='cd ~/.config/awesome && vim wi.lua'
 alias eRT='cd ~/.config/awesome/themes/rulebend3r && vim theme.lua' 
 alias cdA='cd ~/.config/awesome'
 alias cdT='cd ~/.config/awesome/themes/rulebend3r'
+alias ACS='mupdf ~/.awesome-cheat-sheet.pdf'
 
 ## Tmux
 alias TM='tmux'
@@ -218,6 +214,9 @@ alias cdV='cd ~/Videos'
 alias cdc='cd ~/.config'
 alias RG='ranger'
 alias cdGS='cd ~/Git/searx/'
+alias cdH='cd /home/rulebend3r'
+alias cdB='mount /dev/sda2 /boot && cd /boot'
+alias umB='cd && umount /dev/sda2 && cd /home/rulebend3r'
 
 ## X Resources Stuff
 alias eX='vim ~/.Xresources'
@@ -235,7 +234,7 @@ alias z='source ~/.zshrc'
 alias eV='vim ~/.vimrc'
 alias e='vim'
 alias se='sudo vim'
-
+alias VCS='mupdf ~/.vim-cheat-sheet.pdf'
 ## Scripts
 alias cdS='cd ~/Scripts'
 
@@ -263,7 +262,7 @@ alias SRX='python /usr/lib64/python3.6/site-packages/searx/webapp.py'
 ##Misc
 alias calc='galculator'
 alias SGP='sudo gparted'
-alias SPC='sudo pcmanfm'
+alias SPC='sudo pcmanfm-qt'
 alias ST='sudo thunar'
 alias x='exit'
 alias xset='xsetroot -cursor_name left_ptr'
@@ -271,9 +270,11 @@ alias SX='startx'
 alias H='htop'
 alias G='glances -t 1'
 alias GT='gotop'
+alias BP='bpytop'
 alias SS='sudo su'
 alias um='unimatrix -a -f -l k -s 90'
 alias cm='cmatrix'
+alias neo='neo --noglitch -S 3'
 alias sw='telnet towel.blinkenlights.nl'
 
 ###########################################################
@@ -461,3 +462,10 @@ source /usr//share/zsh/site-functions/zsh-syntax-highlighting.zsh
 #Linux From Scratch#
 #source /home/rulebend3r/Git-Packages/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+
+
+PATH="/home/rulebend3r/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/rulebend3r/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/rulebend3r/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/rulebend3r/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/rulebend3r/perl5"; export PERL_MM_OPT;
