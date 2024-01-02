@@ -11,15 +11,15 @@ set 1 bios_grub on
 mkpart primary 3 515
 name 2 boot
 set 2 BOOT on
-mkpart primary 515 8708
+mkpart primary 515 33284
 name 3 swap
-mkpart primary 8708 70148
+mkpart primary 33284 135684
 name 4 root
-mkpart primary 70148 -1
+mkpart primary 135684 -1
 name 5 home
 print
 quit
-mkfs.fat -F32 -n "boot" /dev/sda2
+mkfs.fat -F 32 -n "boot" /dev/sda2
 mkswap -L "swap" /dev/sda3
 swapon /dev/sda3
 mkfs.ext4 -L "root" /dev/sda4
@@ -94,7 +94,7 @@ emerge --sync
 eselect news list
 eselect news read
 eselect profile list
-eselect profile set 9 (or which ever you prefer)
+eselect profile set 11 (or which ever you prefer)
 emerge -uvDNa --with-bdeps=y @world
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
@@ -103,60 +103,13 @@ locale-gen
 eselect locale list
 eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
-nano /etc/portage/package.use/kernel
-add the following:
-sys-kernel/gentoo-sources symlink
-save
-emerge -av sys-kernel/gentoo-sources
+emerge -av sys-kernel/gentoo-kernel-bin
 ls -l /usr/src/linux
 emerge -av sys-apps/pciutils
-emerge -av sys-kernel/genkernel
 emerge -av sys-kernel/linux-firmware (if not already installed)
 emerge -av sys-firmware/intel-microcode
-nano -w /etc/fstab
-add the following:
-# /etc/fstab: static file system information.
-#
-# noatime turns off atimes for increased performance (atimes normally aren't 
-# needed); notail increases performance of ReiserFS (at the expense of storage 
-# efficiency).  It's safe to drop the noatime options if you want and to 
-# switch between notail / tail freely.
-#
-# The root filesystem should have a pass number of either 0 or 1.
-# All other filesystems should have a pass number of 0 or greater than 1.
-#
-# See the manpage fstab(5) for more information.
-#
-
-# <fs>			<mountpoint>	<type>		<opts>		<dump/pass>
-
-# NOTE: If your BOOT partition is ReiserFS, add the notail option to opts.
-#
-# NOTE: Even though we list ext4 as the type here, it will work with ext2/ext3
-#       filesystems.  This just tells the kernel to use the ext4 driver.
-#
-# NOTE: You can use full paths to devices like /dev/sda3, but it is often
-#       more reliable to use filesystem labels or UUIDs. See your filesystem
-#       documentation for details on setting a label. To obtain the UUID, use
-#       the blkid(8) command.
-
-/dev/sda2		/boot		    vfat		noauto,noatime	1 2
-/dev/sda4		/		        ext4		noatime		0 1
-/dev/sda3		none		    swap		sw		0 0
-/dev/sda5		/home		    ext4		noatime		0 2
-/dev/cdrom	/mnt/cdrom	auto		noauto,ro	0 0
-save
-cat /etc/fstab (to check)
-genkernel --makeopts=-j13 --menuconfig all
-activate the following modules:
-alsa pulseaudio lm_sensors xorg wifi anything intel
-usb2, 3, mass storage
-core 2/newer xeon
-premptible latency
-change local version -rulebend3r
-change hostname
-whatever applies to your machine etc etc
-save as .config
+emerge -av genfstab
+genfstab -U / >> /etc/fstab
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
