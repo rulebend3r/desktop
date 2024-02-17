@@ -5,30 +5,27 @@ setterm -blank 0
 parted -a optimal /dev/sda
 mklabel gpt
 unit mib
-mkpart primary 1 3
-name 1 grub
-set 1 bios_grub on
-mkpart primary 3 515
-name 2 boot
-set 2 BOOT on
-mkpart primary 515 33284
-name 3 swap
-mkpart primary 33284 135684
-name 4 root
-mkpart primary 135684 -1
-name 5 home
+mkpart primary 1 513
+name 1 boot
+set 1 BOOT on
+mkpart primary 513 33282
+name 2 swap
+mkpart primary 33282 135682
+name 3 root
+mkpart primary 135682 -1
+name 4 home
 print
 quit
-mkfs.fat -F 32 -n "boot" /dev/sda2
-mkswap -L "swap" /dev/sda3
-swapon /dev/sda3
-mkfs.ext4 -L "root" /dev/sda4
-mkfs.ext4 -L "home" /dev/sda5
-mount /dev/sda4 /mnt/gentoo
+mkfs.fat -F 32 -n "boot" /dev/sda1
+mkswap -L "swap" /dev/sda2
+swapon /dev/sda2
+mkfs.ext4 -L "root" /dev/sda3
+mkfs.ext4 -L "home" /dev/sda4
+mount /dev/sda3 /mnt/gentoo
 mkdir /mnt/gentoo/boot
-mount /dev/sda2 /mnt/gentoo/boot
+mount /dev/sda1 /mnt/gentoo/boot
 mkdir /mnt/gentoo/home
-mount /dev/sda5 /mnt/gentoo/home
+mount /dev/sda4 /mnt/gentoo/home
 date MMDDhhmmYYYY
 cd /mnt/gentoo
 links https://www.gentoo.org/downloads
@@ -76,8 +73,6 @@ PKGDIR="${PORTDIR}/packages"
 save
 mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
 select a mirror and save
-mkdir --parents /mnt/gentoo/etc/portage/repos.conf
-cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf
 cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
 mount --types proc /proc /mnt/gentoo/proc
 mount --rbind /sys /mnt/gentoo/sys
@@ -89,12 +84,14 @@ mount --make-slave /mnt/gentoo/run
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
+mkdir --parents /etc/portage/repos.conf
+cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf
 emerge-webrsync
 emerge --sync
 eselect news list
 eselect news read
 eselect profile list
-eselect profile set 11 (or which ever you prefer)
+eselect profile set 9 (or which ever you prefer)
 emerge -uvDNa --with-bdeps=y @world
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
@@ -103,43 +100,40 @@ locale-gen
 eselect locale list
 eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+emerge -av sys-kernel/linux-firmware (if not already installed)
+emerge -av sys-firmware/sof-firmware
+emerge -av sys-firmware/intel-microcode
 emerge -av sys-kernel/gentoo-kernel-bin
 ls -l /usr/src/linux
 emerge -av sys-apps/pciutils
-emerge -av sys-kernel/linux-firmware (if not already installed)
-emerge -av sys-firmware/intel-microcode
 emerge -av genfstab
 genfstab -U / >> /etc/fstab
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
 emerge -av --noreplace net-misc/netifrc
-ifconfig (write down your network identifier) for me its enp3s0
-nano -w /etc/conf.d/net
-add the following:
-config_enp3s0="dhcp" (use whatever your network identifier is in place of enp3s0)
-save
-cd /etc/init.d
-ln -s net.lo net.enp3s0 (use whatever your network identifier is in place of enp3s0)
-rc-update add net.enp3s0 default (use whatever your network identifier is in place of enp3s0)
-nano -w /etc/hosts
-add desired name
-save
-cd /
+emerge -av networkmanager
+rc-update add NetworkManager default
 emerge -av sys-apps/pcmciautils
 passwd
 create new root password
 nano -w /etc/conf.d/hwclock
 change "UTC" to "local" if dual booting with Windows
 save
-emerge -av syslog-ng cronie mlocate logrotate
-rc-update add syslog-ng default
+emerge -av sysklogd cronie mlocate logrotate
+rc-update add sysklogd default
 rc-update add cronie default
 rc-update add sshd default
 rc-update add elogind default
-emerge --av dhcpcd iproute2 net-tools wireless-tools iw gentoolkit
+emerge --av iproute2 net-tools wireless-tools iw gentoolkit
 emerge -av sys-boot/grub:2 os-prober
-grub-install /dev/sda
+nano -w /etc/default/grub and add the following at the bottom of the file:
+GRUB_DISABLE_OS_PROBER=false
+mkdir /boot/efi
+grub-install --efi-directory=/boot/efi
+cd /boot/efi
+move "EFI" folder from /boot/efi to /boot
+rm -rf /boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 exit
 cd
@@ -174,28 +168,10 @@ alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
 rc-update add alsasound boot
 rc-update add udev default
-cd /etc/portage/
-mkdir package.unmask package.keywords package.license
-cd package.keywords
-nano zz-misc-keywords
-add a # and save
-cd ..
-cd package.use
-nano zz-misc-use
-add a # and save
-cd ..
-nano make.conf
-uncomment XFCE_PLUGINS
-save
-cd /home/rulebend3r
-emerge -av xfce-base/xfce4-meta xfce-extra/xfce4-notifyd
-emerge -av --deselect=y xfce-extra/xfce4-notifyd
-emerge -av leafpad xfce4-terminal gtk-engines-xfce thunar-shares-plugin thunarx-python thunar-archive-plugin thunar-vcs-plugin thunar-media-tags-plugin thunar-volman gvfs xfce4-power-manager
-reboot
-login as user
+emerge -av plasma-meta yaykuake konsole pcmanfm-qt
 sudo nano -w .xinitrc
 add the following:
-ck-launch-session dbus-launch --sh-syntax --exit-with-session xfce4-session
+dbus-launch --sh-syntax --exit-with-session startplasma-x11
 save
 startx
 launch terminal (font color #BF8CFF)
@@ -206,88 +182,44 @@ nano 00-eixrc
 at end of file add the following:
 EIX_LIMIT=0
 save
+eix-update
 emerge-webrsync
-sudo eix-sync
+eix-sync
 emerge -uvDNa --with-bdeps=y @world
 
 ##everything below is optional and packages that i use##
 
 make package.use files and_ install the following packages:
-libcaca
+awesome
+vicious
+picom
+tilix
+bpytop
+cmus
+kochi-substitute
+Curses
+weechat
+ranger
+eselect-repository
 git
+blueman
 conky
-chromium
 telnet-bsd
 genlop
-layman
 htop
-glances
-screenfetch
+neofetch
 rxvt-unicode
-screenshooter
 libreoffice
 gimp
 gparted
-ristretto
-tumbler
-mpd
 mpv
-ncmpcpp
-pidgin
-clipgrab
-imsettings
-kodi
-networkmanager
 nm-applet
 zip
 unzip
 p7zip
+rar
 unrar
-guake
-cmatrix
-sl
-adobe-flash
-jdk icedtea-web
 hddtemp
 lm_sensors
-tmux
 zsh
 vim
-
-launch 2nd xfce4-terminal
-as user:
-mkdir Git
-cd Git
-git clone https://github.com/rulebend3r/rulebend3r_desktop.git
-put your files where they belong
-sudo su
-cd /var/lib/layman
-vim make.conf
-add the following:
-PORTDIR_OVERLAY="
-
-$PORTDIR_OVERLAY
-"
-save
-cd /etc/portage
-vim make.conf
-uncomment source /var/lib/layman/make.conf
-save
-layman -L
-layman -a mv raiagent ArtSoftware torbrowser
-sudo eix-sync
-cd /etc/portage/package.mask
-vim overlays
-add the following:
-*/*::mv
-save
-cd ..
-cd package.unmask
-vim zsh-syntax-highlighting
-add the following:
-app-shells/zsh-syntax-highlighting::mv
-save
-emerge -av zsh-syntax-highlighting asciiquarium powerline powerline-symbols powerline-vim
-as user in home directory:
-git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
