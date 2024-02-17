@@ -111,7 +111,6 @@ genfstab -U / >> /etc/fstab
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
-emerge -av --noreplace net-misc/netifrc
 emerge -av networkmanager
 rc-update add NetworkManager default
 emerge -av sys-apps/pcmciautils
