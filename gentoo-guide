@@ -119,19 +119,20 @@ create new root password
 nano -w /etc/conf.d/hwclock
 change "UTC" to "local" if dual booting with Windows
 save
-emerge -av sysklogd cronie mlocate logrotate
+emerge -av sysklogd cronie mlocate logrotate chrony
 rc-update add sysklogd default
+rc-update add chronyd default
 rc-update add cronie default
 rc-update add sshd default
 rc-update add elogind default
-emerge --av iproute2 net-tools wireless-tools iw gentoolkit
-emerge -av sys-boot/grub:2 os-prober
+emerge -av wireless-tools iw gentoolkit genlop
+emerge -av sys-boot/grub os-prober
 nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
 mkdir /boot/efi
 grub-install --efi-directory=/boot/efi
 cd /boot/efi
-move "EFI" folder from /boot/efi to /boot
+copy "EFI" folder from /boot/efi to /boot
 rm -rf /boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 exit
