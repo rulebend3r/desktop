@@ -88,12 +88,12 @@ mkdir --parents /etc/portage/repos.conf
 cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf
 emerge-webrsync
 emerge --sync
-eselect news list
-eselect news read
 eselect profile list
 eselect profile set 9 (or which ever you prefer)
 emerge -av app-portage/cpuid2cpuflags
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+eselect news list
+eselect news read
 emerge -uvDNa --with-bdeps=y @world
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
