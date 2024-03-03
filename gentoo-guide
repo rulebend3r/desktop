@@ -102,6 +102,7 @@ save
 nano -w /etc/eix/eixrc (and add the following at the bottom of file):
 EIX_LIMIT=0
 save
+eix-update
 exit
 cd
 umount -l /mnt/gentoo/dev{/shm,/pts,}
