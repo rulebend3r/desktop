@@ -110,6 +110,7 @@ ls -l /usr/src/linux
 emerge -av sys-apps/pciutils
 emerge -av genfstab
 genfstab -U / >> /etc/fstab
+echo *desired hostname* > /etc/hostname 
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
@@ -207,10 +208,10 @@ git
 blueman
 conky
 telnet-bsd
-genlop
 htop
 neofetch
 rxvt-unicode
+urxvt-perls
 libreoffice
 gimp
 gparted
