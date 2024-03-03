@@ -33,43 +33,7 @@ navigate to and download amd64 stage3 tarball
 exit links
 tar xvpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 nano -w /mnt/gentoo/etc/portage/make.conf
-add the following:
-# These settings were set by the catalyst build script that automatically
-# built this stage.
-# Please consult /usr/share/portage/config/make.conf.example for a more
-# detailed example.
-
-CFLAGS="-march=native -O2 -pipe"
-CXXFLAGS="${CFLAGS}"
-
-# WARNING: Changing your CHOST is not something that should be done lightly.
-# Please consult http://www.gentoo.org/doc/en/change-chost.xml before changing.
-
-CHOST="x86_64-pc-linux-gnu"
-
-# These are the USE and USE_EXPAND flags that were used for
-# buidling in addition to what is provided by the profile.
-
-USE="X threads gstreamer upower dbus jpeg png svg lock session startup-notification thunar udev dvd cdr usb pulseaudio alsa python gtk gtk2 gtk3 icu networkmanager lm_sensors mmx sse sse2 -systemd -qt4 -qt5 -kde -gnome"
-
-#source /var/lib/layman/make.conf
-
-MAKE_OPTS="-j13"
-
-VIDEO_CARDS="intel fbdev"
-ALSA_CARDS="snd_hda_intel"
-INPUT_DEVICES="evdev keyboard mouse synaptics"
-
-#XFCE_PLUGINS="power brightness clock trash"
-
-#CPU_FLAGS_X86="mmx sse sse2"
-
-ACCEPT_LICENSE="* @EULA"
-L10N="en_US"
-
-PORTDIR="/usr/portage"
-DISTDIR="${PORTDIR}/distfiles"
-PKGDIR="${PORTDIR}/packages"
+adjust file as necessary
 save
 mirrorselect -i -o >> /mnt/gentoo/etc/portage/make.conf
 select a mirror and save
@@ -91,9 +55,9 @@ emerge --sync
 eselect profile list
 eselect profile set 8 (or which ever you prefer)
 emerge -av app-portage/cpuid2cpuflags
-echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 eselect news list
 eselect news read
+echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 emerge -uvDNa --with-bdeps=y @world
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
