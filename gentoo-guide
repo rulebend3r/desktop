@@ -66,13 +66,10 @@ locale-gen
 eselect locale list
 eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
-emerge -av sys-kernel/linux-firmware (if not already installed)
-emerge -av sys-firmware/sof-firmware
-emerge -av sys-firmware/intel-microcode
-emerge -av sys-kernel/gentoo-kernel-bin
+emerge -av linux-firmware sof-firmware intel-microcode
+emerge -av gentoo-kernel-bin
 ls -l /usr/src/linux
-emerge -av sys-apps/pciutils
-emerge -av genfstab
+emerge -av pciutils genfstab
 genfstab -U / >> /etc/fstab
 echo *desired hostname* > /etc/hostname 
 nano -w /etc/conf.d/hostname
