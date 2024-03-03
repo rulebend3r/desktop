@@ -106,6 +106,8 @@ cp -r EFI /boot
 cd ..
 rm -rf /boot/new
 grub-mkconfig -o /boot/grub/grub.cfg
+emerge -av sudo
+visudo (uncomment the setting of your choice)
 exit
 cd
 umount -l /mnt/gentoo/dev{/shm,/pts,}
@@ -119,15 +121,6 @@ useradd -m -G users,wheel,disk,lp,mem,floppy,console,audio,video,cdrom,cdrw,tape
 passwd rulebend3r (replace rulebend3r with your new username)
 add new password for new username
 rm /stage3-*.tar.xz
-emerge -uvDNa --with-bdeps=y @world
-nano -w /etc/portage/package.use/sudo
-add the following:
-app-admin/sudo offensive
-save
-emerge -av app-admin/sudo
-EDITOR=nano visudo
-uncomment wheel
-save
 reboot
 login as user
 sudo su
