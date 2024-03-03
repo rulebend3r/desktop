@@ -89,7 +89,7 @@ cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf
 emerge-webrsync
 emerge --sync
 eselect profile list
-eselect profile set 9 (or which ever you prefer)
+eselect profile set 8 (or which ever you prefer)
 emerge -av app-portage/cpuid2cpuflags
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 eselect news list
