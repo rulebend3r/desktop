@@ -95,9 +95,16 @@ nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
 mkdir /boot/efi
 grub-install --efi-directory=/boot/efi
+cd /boot
+mkdir /boot/new
 cd /boot/efi
-copy "EFI" folder from /boot/efi to /boot
+cp -r EFI /boot/new
+cd ..
 rm -rf /boot/efi
+cd /boot/new
+cp -r EFI /boot
+cd ..
+rm -rf /boot/new
 grub-mkconfig -o /boot/grub/grub.cfg
 exit
 cd
