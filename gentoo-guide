@@ -94,21 +94,14 @@ emerge -av sys-boot/grub os-prober
 eselect news read
 nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
-mkdir /boot/efi
-grub-install --efi-directory=/boot/efi
-cd /boot
-mkdir /boot/new
-cd /boot/efi
-cp -r EFI /boot/new
-cd ..
-rm -rf /boot/efi
-cd /boot/new
-cp -r EFI /boot
-cd ..
-rm -rf /boot/new
+grub-install --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
-emerge -av sudo
+emerge -av sudo eix
 visudo (uncomment the setting of your choice)
+save
+nano -w /etc/eix/eixrc (and add the following at the bottom of file):
+EIX_LIMIT=0
+save
 exit
 cd
 umount -l /mnt/gentoo/dev{/shm,/pts,}
