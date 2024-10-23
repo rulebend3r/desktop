@@ -16,11 +16,12 @@ mkpart primary 135682 -1
 name 4 home
 print
 quit
-mkfs.fat -F 32 -n "boot" /dev/sda1
+mkfs.fat -F 32 /dev/sda1
 mkswap -L "swap" /dev/sda2
 swapon /dev/sda2
 mkfs.ext4 -L "root" /dev/sda3
 mkfs.ext4 -L "home" /dev/sda4
+mkdir --parents /mnt/gentoo
 mount /dev/sda3 /mnt/gentoo
 mkdir /mnt/gentoo/boot
 mount /dev/sda1 /mnt/gentoo/boot
@@ -48,17 +49,16 @@ mount --make-slave /mnt/gentoo/run
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
-mkdir --parents /etc/portage/repos.conf
-cp /usr/share/portage/config/repos.conf /etc/portage/repos.conf/gentoo.conf
 emerge-webrsync
 emerge --sync
 eselect profile list
-eselect profile set 8 (or which ever you prefer)
+eselect profile set 27 (or which ever you prefer)
 emerge -av app-portage/cpuid2cpuflags
 eselect news list
 eselect news read
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 emerge -uvDNa --with-bdeps=y @world
+ln -sf ../usr/share/zoneinfo/US/Eastern /etc/localtime
 echo "US/Eastern" > /etc/timezone
 emerge --config sys-libs/timezone-data
 nano -w /etc/locale.gen (uncomment en_US.UTF-8 UTF-8)
@@ -66,8 +66,7 @@ locale-gen
 eselect locale list
 eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
-emerge -av linux-firmware sof-firmware intel-microcode
-emerge -av gentoo-kernel-bin
+emerge -av linux-firmware sof-firmware intel-microcode gentoo-kernel-bin
 ls -l /usr/src/linux
 emerge -av pciutils genfstab
 genfstab -U / >> /etc/fstab
@@ -89,6 +88,11 @@ rc-update add chronyd default
 rc-update add cronie default
 rc-update add sshd default
 rc-update add elogind default
+rc-update add udev default
+rc-update add dbus default
+rc-update add consolefont default
+rc-update add bluetooth default
+rc-update add gpm default
 emerge -av wireless-tools iw gentoolkit genlop
 emerge -av sys-boot/grub os-prober
 eselect news read
@@ -96,7 +100,7 @@ nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
 grub-install --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
-emerge -av sudo eix
+emerge -av sudo eix htop lsof
 visudo (uncomment the setting of your choice)
 save
 nano -w /etc/eix/eixrc (and add the following at the bottom of file):
@@ -120,14 +124,13 @@ reboot
 login as user
 sudo su
 emerge -av xorg-apps xorg-fonts xorg-drivers xorg-server twm xterm xclock
-emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins alsa-mixer pulseaudio pavucontrol
+emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins pulseaudio pavucontrol
 euse -E alsa (if alsa is not flagged globally in make.conf)
 /etc/init.d/alsasound start
 alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
 rc-update add alsasound boot
-rc-update add udev default
-emerge -av plasma-meta yaykuake konsole pcmanfm-qt
+emerge -av plasma-meta yaykuake konsole dolphin
 sudo nano -w .xinitrc
 add the following:
 dbus-launch --sh-syntax --exit-with-session startplasma-x11
