@@ -82,7 +82,7 @@ create new root password
 nano -w /etc/conf.d/hwclock
 change "UTC" to "local" if dual booting with Windows
 save
-emerge -av sysklogd cronie mlocate chrony
+emerge -av sysklogd cronie mlocate chrony io-scheduler-udev-rules
 rc-update add sysklogd default
 rc-update add chronyd default
 rc-update add cronie default
