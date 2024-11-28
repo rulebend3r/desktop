@@ -1,6 +1,10 @@
-use gparted live usb and wipe drive(s)
-create gpt partition scheme on drive(s)
+***in this tutorial, it is assumed that the proper drive name is /dev/sda. use the lsblk command to determine yours.***
+
+use gparted live usb and wipe drive and create gpt partition scheme (this method will also help determine the proper drive name)
+or..
 boot gentoo live install usb
+wipefs --all /dev/sda
+
 setterm -blank 0
 parted -a optimal /dev/sda
 mklabel gpt
