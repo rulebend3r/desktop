@@ -1,4 +1,4 @@
-*****in this tutorial, it is assumed that the proper drive name is /dev/sda and an Intel processor*****
+*****in this tutorial, it is assumed that the proper drive name is /dev/sda*****
 
 use gparted live usb to wipe drive and create gpt partition scheme (this method will also determine the proper drive name)
 or..
@@ -71,7 +71,7 @@ locale-gen
 eselect locale list
 eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
-emerge -av linux-firmware sof-firmware intel-microcode gentoo-kernel-bin
+emerge -av linux-firmware sof-firmware gentoo-kernel-bin intel-microcode(<--if you have an Intel processor)
 ls -l /usr/src/linux
 emerge -av pciutils genfstab
 genfstab -U / >> /etc/fstab
