@@ -1,8 +1,9 @@
-***in this tutorial, it is assumed that the proper drive name is /dev/sda. use the lsblk command to determine yours.***
+*****in this tutorial, it is assumed that the proper drive name is /dev/sda and an Intel processor*****
 
-use gparted live usb and wipe drive and create gpt partition scheme (this method will also help determine the proper drive name)
+use gparted live usb to wipe drive and create gpt partition scheme (this method will also determine the proper drive name)
 or..
 boot gentoo live install usb
+lsblk
 wipefs --all /dev/sda
 
 setterm -blank 0
@@ -56,7 +57,7 @@ export PS1="(chroot) ${PS1}"
 emerge-webrsync
 emerge --sync
 eselect profile list
-eselect profile set 27 (or which ever you prefer)
+eselect profile set 27 (for KDE/Plasma or a different number for a DE you prefer)
 emerge -av app-portage/cpuid2cpuflags
 eselect news list
 eselect news read
@@ -135,17 +136,24 @@ euse -E alsa (if alsa is not flagged globally in make.conf)
 alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
 rc-update add alsasound boot
+
+****deviate here if another desktop environment was selected at step 60****
+
 emerge -av plasma-meta yaykuake konsole kde-apps/dolphin kwalletmanager
-sudo nano -w .xinitrc
+reboot
+login as user
+nano -w .xinitrc
 add the following:
 dbus-launch --sh-syntax --exit-with-session startplasma-x11
 save
 startx
-launch terminal (font color #BF8CFF)
 
-##everything below is optional and packages that i use##
+****everything below is optional and packages that i use****
+
+terminal (font color #BF8CFF)
 
 make package.use files and_ install the following packages:
+
 awesome
 vicious
 picom
