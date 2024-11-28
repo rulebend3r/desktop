@@ -8,11 +8,11 @@ unit mib
 mkpart primary 1 513
 name 1 boot
 set 1 BOOT on
-mkpart primary 513 33282
+mkpart primary 513 33282 (or 513 66050)
 name 2 swap
-mkpart primary 33282 135682
+mkpart primary 33282 135682 (or 66050 168450)
 name 3 root
-mkpart primary 135682 -1
+mkpart primary 135682 -1 (or 168450 -1)
 name 4 home
 print
 quit
@@ -82,7 +82,7 @@ create new root password
 nano -w /etc/conf.d/hwclock
 change "UTC" to "local" if dual booting with Windows
 save
-emerge -av sysklogd cronie mlocate chrony io-scheduler-udev-rules
+emerge -av sysklogd cronie mlocate chrony io-scheduler-udev-rules haveged
 rc-update add sysklogd default
 rc-update add chronyd default
 rc-update add cronie default
@@ -93,6 +93,7 @@ rc-update add dbus default
 rc-update add consolefont default
 rc-update add bluetooth default
 rc-update add gpm default
+rc-update add haveged default
 emerge -av wireless-tools iw gentoolkit genlop
 emerge -av sys-boot/grub os-prober
 eselect news read
@@ -130,24 +131,13 @@ euse -E alsa (if alsa is not flagged globally in make.conf)
 alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
 rc-update add alsasound boot
-emerge -av plasma-meta yaykuake konsole dolphin
+emerge -av plasma-meta yaykuake konsole kde-apps/dolphin kwalletmanager
 sudo nano -w .xinitrc
 add the following:
 dbus-launch --sh-syntax --exit-with-session startplasma-x11
 save
 startx
 launch terminal (font color #BF8CFF)
-sudo su
-emerge -av eix
-cd /etc/eixrc
-nano 00-eixrc
-at end of file add the following:
-EIX_LIMIT=0
-save
-eix-update
-emerge-webrsync
-eix-sync
-emerge -uvDNa --with-bdeps=y @world
 
 ##everything below is optional and packages that i use##
 
@@ -155,19 +145,22 @@ make package.use files and_ install the following packages:
 awesome
 vicious
 picom
+blueman
+nm-applet
+lxappearance
+qt6ct
 tilix
 bpytop
 cmus
 kochi-substitute
+terminus-font
 Curses
 weechat
 ranger
 eselect-repository
-git
-blueman
+dev-vcs/git
 conky
 telnet-bsd
-htop
 neofetch
 rxvt-unicode
 urxvt-perls
@@ -175,7 +168,6 @@ libreoffice
 gimp
 gparted
 mpv
-nm-applet
 zip
 unzip
 p7zip
