@@ -3,7 +3,7 @@
 use gparted live usb to wipe drive and create gpt partition scheme (this method will also determine the proper drive name)
 or..
 boot gentoo live install usb
-lsblk
+lsblk (to determine the proper drive name)
 wipefs --all /dev/sda
 
 setterm -blank 0
