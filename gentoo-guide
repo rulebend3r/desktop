@@ -64,8 +64,6 @@ eselect news read
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
 emerge -uvDNa --with-bdeps=y @world
 ln -sf ../usr/share/zoneinfo/US/Eastern /etc/localtime
-echo "US/Eastern" > /etc/timezone
-emerge --config sys-libs/timezone-data
 nano -w /etc/locale.gen (uncomment en_US.UTF-8 UTF-8)
 locale-gen
 eselect locale list
@@ -79,9 +77,8 @@ echo *desired hostname* > /etc/hostname
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
-emerge -av networkmanager
+emerge -av networkmanager pcmciautils
 rc-update add NetworkManager default
-emerge -av sys-apps/pcmciautils
 passwd
 create new root password
 nano -w /etc/conf.d/hwclock
