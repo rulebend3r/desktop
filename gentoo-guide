@@ -13,11 +13,11 @@ unit mib
 mkpart primary 1 513
 name 1 boot
 set 1 BOOT on
-mkpart primary 513 33282 (or 513 66050)
+mkpart primary 513 33282
 name 2 swap
-mkpart primary 33282 135682 (or 66050 168450)
+mkpart primary 33282 135682
 name 3 root
-mkpart primary 135682 -1 (or 168450 -1)
+mkpart primary 135682 -1
 name 4 home
 print
 quit
