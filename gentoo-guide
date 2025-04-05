@@ -106,7 +106,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 emerge -av sudo eix htop lsof
 visudo (uncomment the setting of your choice)
 save
-nano -w /etc/eix/eixrc (and add the following at the bottom of file):
+nano -w /etc/eixrc/eixrc (and add the following at the bottom of file):
 EIX_LIMIT=0
 save
 eix-update
