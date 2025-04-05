@@ -1,4 +1,4 @@
-*****in this tutorial, it is assumed that the proper drive name is /dev/sda*****
+*****in this tutorial, it is assumed that the proper drive name is /dev/sda and you have elected to use openrc as your init system*****
 
 use gparted live usb to wipe drive and create gpt partition scheme (this method will also determine the proper drive name)
 or..
