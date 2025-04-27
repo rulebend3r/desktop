@@ -13,25 +13,35 @@ unit mib
 mkpart primary 1 513
 name 1 boot
 set 1 BOOT on
-mkpart primary 513 33282
+mkpart primary 513 8706 (8gb swap)
 name 2 swap
-mkpart primary 33282 135682
+mkpart primary 8706 70147 (60gb root)
 name 3 root
-mkpart primary 135682 -1
+mkpart primary 70147 -1
 name 4 home
 print
 quit
 mkfs.fat -F 32 /dev/sda1
 mkswap -L "swap" /dev/sda2
 swapon /dev/sda2
-mkfs.ext4 -L "root" /dev/sda3
-mkfs.ext4 -L "home" /dev/sda4
+cryptsetup luksFormat /dev/sda3
+YES
+enter then verify new passphrase
+cryptsetup luksOpen /dev/sda3 root
+enter passphrase
+mkfs.xfs -L "root" /dev/mapper/root
+cryptsetup luksFormat /dev/sda4
+YES
+enter then verify new passphrase
+cryptsetup luksOpen /dev/sda4 home
+enter passphrase
+mkfs.xfs -L "home" /dev/mapper/home
 mkdir --parents /mnt/gentoo
-mount /dev/sda3 /mnt/gentoo
+mount /dev/mapper/root /mnt/gentoo
 mkdir /mnt/gentoo/boot
 mount /dev/sda1 /mnt/gentoo/boot
 mkdir /mnt/gentoo/home
-mount /dev/sda4 /mnt/gentoo/home
+mount /dev/mapper/home /mnt/gentoo/home
 date MMDDhhmmYYYY
 cd /mnt/gentoo
 links https://www.gentoo.org/downloads
@@ -58,10 +68,23 @@ emerge-webrsync
 emerge --sync
 eselect profile list
 eselect profile set 27 (for KDE/Plasma or a different number for a DE you prefer)
+open new terminal tab
+lsblk -o name,uuid (you will need uuids for root, /dev/sda3, home and /dev/sda4)
+mkdir /etc/dracut.conf.d
+nano /etc/dracut.conf.d/luks.conf
+add the following:
+add_dracutmodules+=" crypt "
+kernel_cmdline+=" root=UUID=*enter root uuid here* rd.luks.uuid=*enter /dev/sda3 uuid here* "
+kernel_cmdline+=" root=UUID=*enter home uuid here* rd.luks.uuid=*enter /dev/sda4 uuid here* "
+save
 emerge -av app-portage/cpuid2cpuflags
 eselect news list
 eselect news read
 echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+nano /etc/portage/package.use/installkernel
+add the following
+sys-kernel/installkernel grub dracut
+save
 emerge -uvDNa --with-bdeps=y @world
 ln -sf ../usr/share/zoneinfo/US/Eastern /etc/localtime
 nano -w /etc/locale.gen (uncomment en_US.UTF-8 UTF-8)
@@ -103,7 +126,7 @@ nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
 grub-install --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
-emerge -av sudo eix htop lsof
+emerge -av sudo eix htop lsof xfsprogs xfsdump
 visudo (uncomment the setting of your choice)
 save
 nano -w /etc/eixrc/eixrc (and add the following at the bottom of file):
