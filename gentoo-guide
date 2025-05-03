@@ -106,7 +106,7 @@ create new root password
 nano -w /etc/conf.d/hwclock
 change "UTC" to "local" if dual booting with Windows
 save
-emerge -av sysklogd cronie mlocate chrony io-scheduler-udev-rules haveged
+emerge -av sysklogd cronie mlocate chrony io-scheduler-udev-rules haveged os-prober
 rc-update add sysklogd default
 rc-update add chronyd default
 rc-update add cronie default
@@ -119,7 +119,6 @@ rc-update add bluetooth default
 rc-update add gpm default
 rc-update add haveged default
 emerge -av wireless-tools iw gentoolkit genlop
-emerge -av sys-boot/grub os-prober
 eselect news read
 nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
