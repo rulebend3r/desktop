@@ -149,7 +149,19 @@ rm /stage3-*.tar.xz
 reboot
 login as user
 sudo su
+emerge -av eselect-repository vim dev-vcs/git
+eselect repository list
+eselect repository enable guru
+eselect repository enable dlang
+eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay/brave-overlay.git
+emaint sync -r guru
+emaint sync -r dlang
+emaint sync -r brave-overlay
+eix-update
+emerge -av zsh zsh-completions gentoo-zsh-completions zsh-autosuggestions zsh-syntax-highlighting
+emerge -av thefuck nerdfonts (pick one or more of the following: neofetch fastfetch screenfetch)
 emerge -av xorg-apps xorg-fonts xorg-drivers xorg-server twm xterm xclock
+chsh -s /bin/zsh
 emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins pulseaudio pavucontrol
 euse -E alsa (if alsa is not flagged globally in make.conf)
 /etc/init.d/alsasound start
