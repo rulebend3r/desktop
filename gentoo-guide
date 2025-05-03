@@ -94,19 +94,18 @@ eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 emerge -av linux-firmware sof-firmware gentoo-kernel-bin intel-microcode(<--if you have an Intel processor)
 ls -l /usr/src/linux
-emerge -av pciutils genfstab networkmanager pcmciautils
+emerge -av pciutils genfstab networkmanager pcmciautils sysklogd cronie mlocate chrony io-scheduler-udev-rules haveged os-prober
 genfstab -U / >> /etc/fstab
 echo *desired hostname* > /etc/hostname 
 nano -w /etc/conf.d/hostname
 add desired hostname
 save
-rc-update add NetworkManager default
 passwd
 create new root password
 nano -w /etc/conf.d/hwclock
 change "UTC" to "local" if dual booting with Windows
 save
-emerge -av sysklogd cronie mlocate chrony io-scheduler-udev-rules haveged os-prober
+rc-update add NetworkManager default
 rc-update add sysklogd default
 rc-update add chronyd default
 rc-update add cronie default
