@@ -94,7 +94,7 @@ eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
 emerge -av linux-firmware sof-firmware gentoo-kernel-bin intel-microcode(<--if you have an Intel processor)
 ls -l /usr/src/linux
-emerge -av pciutils genfstab networkmanager pcmciautils sysklogd cronie mlocate chrony io-scheduler-udev-rules haveged os-prober
+emerge -av pciutils genfstab networkmanager pcmciautils sysklogd cronie mlocate chrony io-scheduler-udev-rules haveged
 genfstab -U / >> /etc/fstab
 echo *desired hostname* > /etc/hostname 
 nano -w /etc/conf.d/hostname
@@ -119,6 +119,7 @@ rc-update add gpm default
 rc-update add haveged default
 emerge -av wireless-tools iw gentoolkit genlop
 eselect news read
+emerge -av os-prober grub
 nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
 grub-install --efi-directory=/boot
@@ -147,6 +148,7 @@ reboot
 login as user
 sudo su
 emerge -av eselect-repository vim dev-vcs/git
+git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 eselect repository list
 eselect repository enable guru
 eselect repository enable dlang
