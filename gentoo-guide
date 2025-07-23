@@ -6,11 +6,10 @@ boot gentoo live install usb
 lsblk (to determine the proper drive name)
 wipefs --all /dev/sda
 
-setterm -blank 0
 parted -a optimal /dev/sda
 mklabel gpt
 unit mib
-mkpart primary 1 513
+mkpart primary 1 513 (512mb boot)
 name 1 boot
 set 1 BOOT on
 mkpart primary 513 8706 (8gb swap)
@@ -45,7 +44,7 @@ mount /dev/mapper/home /mnt/gentoo/home
 date MMDDhhmmYYYY
 cd /mnt/gentoo
 links https://www.gentoo.org/downloads
-navigate to and download amd64 stage3 tarball
+navigate to and download amd64 stage3 openrc desktop tarball
 exit links
 tar xvpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
 nano -w /mnt/gentoo/etc/portage/make.conf
@@ -67,7 +66,7 @@ export PS1="(chroot) ${PS1}"
 emerge-webrsync
 emerge --sync
 eselect profile list
-eselect profile set 27 (for KDE/Plasma or a different number for a DE you prefer)
+eselect profile set 7 (for KDE/Plasma or a different number for a DE you prefer)
 open new terminal tab
 lsblk -o name,uuid (you will need uuids for root, /dev/sda3, home and /dev/sda4)
 mkdir /etc/dracut.conf.d
@@ -75,7 +74,7 @@ nano /etc/dracut.conf.d/luks.conf
 add the following:
 add_dracutmodules+=" crypt "
 kernel_cmdline+=" root=UUID=*enter root uuid here* rd.luks.uuid=*enter /dev/sda3 uuid here* "
-kernel_cmdline+=" root=UUID=*enter home uuid here* rd.luks.uuid=*enter /dev/sda4 uuid here* "
+kernel_cmdline+=" home=UUID=*enter home uuid here* rd.luks.uuid=*enter /dev/sda4 uuid here* "
 save
 emerge -av app-portage/cpuid2cpuflags
 eselect news list
@@ -92,7 +91,7 @@ locale-gen
 eselect locale list
 eselect locale set (whatever number en_US.UTF-8 UTF-8 is)
 env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
-emerge -av linux-firmware sof-firmware gentoo-kernel-bin intel-microcode(<--if you have an Intel processor)
+emerge -av linux-firmware sof-firmware gentoo-kernel-bin intel-microcode (<--if you have an Intel processor)
 ls -l /usr/src/linux
 emerge -av pciutils genfstab networkmanager pcmciautils sysklogd cronie mlocate chrony io-scheduler-udev-rules haveged
 genfstab -U / >> /etc/fstab
@@ -103,14 +102,14 @@ save
 passwd
 create new root password
 nano -w /etc/conf.d/hwclock
-change "UTC" to "local" if dual booting with Windows
+change "UTC" to "local" if dual booting with Windows. if not do nothing.
 save
 rc-update add NetworkManager default
 rc-update add sysklogd default
 rc-update add chronyd default
 rc-update add cronie default
 rc-update add sshd default
-rc-update add elogind default
+rc-update add elogind boot
 rc-update add udev default
 rc-update add dbus default
 rc-update add consolefont default
@@ -119,7 +118,7 @@ rc-update add gpm default
 rc-update add haveged default
 emerge -av wireless-tools iw gentoolkit genlop
 eselect news read
-emerge -av os-prober grub
+emerge -av os-prober grub (no need to reinstall grub if it was pulled in by another package earlier. also no need for os-prober if not dual booting.)
 nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
 grub-install --efi-directory=/boot
@@ -150,9 +149,9 @@ sudo su
 emerge -av eselect-repository vim dev-vcs/git
 git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 eselect repository list
-eselect repository enable guru
-eselect repository enable dlang
-eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay/brave-overlay.git
+eselect repository enable guru (for various unofficially supported packages. similar to the AUR for Arch)
+eselect repository enable dlang (for Tilix)
+eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay/brave-overlay.git (for Brave browser)
 emaint sync -r guru
 emaint sync -r dlang
 emaint sync -r brave-overlay
@@ -168,7 +167,7 @@ alsamixer (unmute with m key and set volume on desired channels)
 speaker-test -t wav -c 2 (ctrl + c to kill)
 rc-update add alsasound boot
 
-****deviate here if another desktop environment was selected at step 60****
+****deviate here if another desktop environment was selected at step 69****
 
 emerge -av plasma-meta yaykuake konsole kde-apps/dolphin kwalletmanager
 reboot
