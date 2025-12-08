@@ -151,10 +151,10 @@ git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 eselect repository list
 eselect repository enable guru (for various unofficially supported packages. similar to the AUR for Arch)
 eselect repository enable dlang (for Tilix)
-eselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay/brave-overlay.git (for Brave browser)
+eselect repository enable another-brave-overlay (for Brave browser)
 emaint sync -r guru
 emaint sync -r dlang
-emaint sync -r brave-overlay
+emaint sync -r another-brave-overlay
 eix-update
 emerge -av zsh zsh-completions gentoo-zsh-completions zsh-autosuggestions zsh-syntax-highlighting
 emerge -av thefuck nerdfonts (pick one or more of the following: neofetch fastfetch screenfetch)
