@@ -192,6 +192,9 @@ nm-applet
 lxappearance
 qt6ct
 tilix
+wezterm
+kitty
+ghostty
 bpytop
 cmus
 kochi-substitute
@@ -199,11 +202,9 @@ terminus-font
 Curses
 weechat
 ranger
-eselect-repository
-dev-vcs/git
+ueberzug
 conky
 telnet-bsd
-neofetch
 rxvt-unicode
 urxvt-perls
 libreoffice
@@ -217,5 +218,3 @@ rar
 unrar
 hddtemp
 lm_sensors
-zsh
-vim
