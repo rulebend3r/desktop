@@ -158,9 +158,9 @@ emaint sync -r another-brave-overlay
 eix-update
 emerge -av zsh zsh-completions gentoo-zsh-completions zsh-autosuggestions zsh-syntax-highlighting
 emerge -av thefuck nerdfonts (pick one or more of the following: neofetch fastfetch screenfetch)
-emerge -av xorg-apps xorg-fonts xorg-drivers xorg-server twm xterm xclock
 chsh -s /bin/zsh
-emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins pulseaudio pavucontrol
+emerge -av xorg-apps xorg-fonts xorg-drivers xorg-server twm xterm xclock nvidia-drivers (<--if needed)
+emerge -av alsa-lib alsa-firmware alsa-tools alsa-utils alsa-plugins pulseaudio-daemon pavucontrol
 euse -E alsa (if alsa is not flagged globally in make.conf)
 /etc/init.d/alsasound start
 alsamixer (unmute with m key and set volume on desired channels)
