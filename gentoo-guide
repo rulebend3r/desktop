@@ -1,12 +1,12 @@
-*****in this tutorial, it is assumed that the proper drive name is /dev/sda and you have elected to use openrc as your init system*****
+*****in this tutorial, it is assumed that the proper drive name is /dev/nvme0n1 and you have elected to use openrc as your init system*****
 
 use gparted live usb to wipe drive and create gpt partition scheme (this method will also determine the proper drive name)
 or..
 boot gentoo live install usb
 lsblk (to determine the proper drive name)
-wipefs --all /dev/sda
+wipefs --all /dev/nvme0n1
 
-parted -a optimal /dev/sda
+parted -a optimal /dev/nvme0n1
 mklabel gpt
 unit mib
 mkpart primary 1 513 (512mb boot)
@@ -20,25 +20,25 @@ mkpart primary 70147 -1
 name 4 home
 print
 quit
-mkfs.fat -F 32 /dev/sda1
-mkswap -L "swap" /dev/sda2
-swapon /dev/sda2
-cryptsetup luksFormat /dev/sda3
+mkfs.fat -F 32 /dev/nvme0n1p1
+mkswap -L "swap" /dev/nvme0n1p2
+swapon /dev/nvme0n1p2
+cryptsetup luksFormat /dev/nvme0n1p3
 YES
 enter then verify new passphrase
-cryptsetup luksOpen /dev/sda3 root
+cryptsetup luksOpen /dev/nvme0n1p3 root
 enter passphrase
 mkfs.xfs -L "root" /dev/mapper/root
-cryptsetup luksFormat /dev/sda4
+cryptsetup luksFormat /dev/nvme0n1p4
 YES
 enter then verify new passphrase
-cryptsetup luksOpen /dev/sda4 home
+cryptsetup luksOpen /dev/nvme0n1p4 home
 enter passphrase
 mkfs.xfs -L "home" /dev/mapper/home
 mkdir --parents /mnt/gentoo
 mount /dev/mapper/root /mnt/gentoo
 mkdir /mnt/gentoo/boot
-mount /dev/sda1 /mnt/gentoo/boot
+mount /dev/nvme0n1p1 /mnt/gentoo/boot
 mkdir /mnt/gentoo/home
 mount /dev/mapper/home /mnt/gentoo/home
 date MMDDhhmmYYYY
@@ -46,7 +46,7 @@ cd /mnt/gentoo
 links https://www.gentoo.org/downloads
 navigate to and download amd64 stage3 openrc desktop tarball
 exit links
-tar xvpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner
+tar xvpf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo
 nano -w /mnt/gentoo/etc/portage/make.conf
 adjust file as necessary
 save
@@ -123,7 +123,7 @@ nano -w /etc/default/grub and add the following at the bottom of the file:
 GRUB_DISABLE_OS_PROBER=false
 grub-install --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
-emerge -av sudo eix htop lsof xfsprogs xfsdump
+emerge -av sudo eix htop lsof xfsprogs xfsdump vim eselect-repository dev-vcs/git
 visudo (uncomment the setting of your choice)
 save
 nano -w /etc/eixrc/eixrc (and add the following at the bottom of file):
@@ -145,9 +145,8 @@ add new password for new username
 rm /stage3-*.tar.xz
 reboot
 login as user
-sudo su
-emerge -av eselect-repository vim dev-vcs/git
 git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+sudo su
 eselect repository list
 eselect repository enable guru (for various unofficially supported packages. similar to the AUR for Arch)
 eselect repository enable dlang (for Tilix)
