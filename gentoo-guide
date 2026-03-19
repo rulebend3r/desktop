@@ -221,3 +221,7 @@ lm_sensors
 flatpak (if your flatpak package does not honor your cursor theme, run the following 2 commands as user, not root):
 flatpak --user override --filesystem=/home/$USER/.icons/:ro
 flatpak --user override --filesystem=/usr/share/icons/:ro
+
+git add "file"
+git commit -m "file"
+git push origin master
