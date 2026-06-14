@@ -60,6 +60,10 @@ mount --rbind /dev /mnt/gentoo/dev
 mount --make-rslave /mnt/gentoo/dev
 mount --bind /run /mnt/gentoo/run
 mount --make-slave /mnt/gentoo/run
+(if not using gentoo install media, i.e. ubuntu or linux mint live usb, etc, issue the following commands. if using gentoo install media, skip to line 67 and proceed)
+test -L /dev/shm && rm /dev/shm && mkdir /dev/shm
+mount --types tmpfs --options nosuid,nodev,noexec shm /dev/shm 
+chmod 1777 /dev/shm /run/shm
 chroot /mnt/gentoo /bin/bash
 source /etc/profile
 export PS1="(chroot) ${PS1}"
@@ -68,13 +72,13 @@ emerge --sync
 eselect profile list
 eselect profile set 7 (for KDE/Plasma or a different number for a DE you prefer)
 open new terminal tab
-lsblk -o name,uuid (you will need uuids for root, /dev/sda3, home and /dev/sda4)
+lsblk -o name,uuid (you will need uuids for root, /dev/nvme0n1p3, home and /dev/nvme0n1p4)
 mkdir /etc/dracut.conf.d
 nano /etc/dracut.conf.d/luks.conf
 add the following:
 add_dracutmodules+=" crypt "
-kernel_cmdline+=" root=UUID=*enter root uuid here* rd.luks.uuid=*enter /dev/sda3 uuid here* "
-kernel_cmdline+=" home=UUID=*enter home uuid here* rd.luks.uuid=*enter /dev/sda4 uuid here* "
+kernel_cmdline+=" root=UUID=*enter root uuid here* rd.luks.uuid=*enter /dev/nvme0n1p3 uuid here* "
+kernel_cmdline+=" home=UUID=*enter home uuid here* rd.luks.uuid=*enter /dev/nvme0n1p4 uuid here* "
 save
 emerge -av app-portage/cpuid2cpuflags
 eselect news list
